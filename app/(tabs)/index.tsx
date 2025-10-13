@@ -4,7 +4,6 @@ import {
   ActivityIndicator,
   FlatList,
   ListRenderItem,
-  Text,
   View,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -30,11 +29,7 @@ export default function HomeScreen() {
       {data && (
         <FlatList
           data={data.allCities}
-          renderItem={({ item }) => (
-            <View>
-              <Text>{`${item.name}`}</Text>
-            </View>
-          )}
+          renderItem={renderItem}
           keyExtractor={keyExtractor}
           ItemSeparatorComponent={ItemSeparator}
         />
