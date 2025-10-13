@@ -5,6 +5,8 @@ export const GET_CITIES = gql`
     allCities {
       id
       name
+      language
+      currency
     }
   }
 `;
