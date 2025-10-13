@@ -8,8 +8,24 @@ type CityViewProps = {
 
 export const CityView = ({ city }: CityViewProps) => {
   return (
-    <View>
-      <Text>{`${city.name}`}</Text>
+    <View style={{ padding: 18, backgroundColor: '#fff', borderRadius: 8 }}>
+      <Text
+        style={{
+          fontSize: 16,
+          fontWeight: '700',
+          marginBottom: 8,
+        }}>{`${city.name}`}</Text>
+      <Text
+        style={{
+          fontSize: 16,
+          fontWeight: 300,
+          marginBottom: 4,
+        }}>{`🌍 Language: ${city.language}`}</Text>
+      <Text
+        style={{
+          fontSize: 16,
+          fontWeight: 300,
+        }}>{`💰 Currency: ${city.currency}`}</Text>
     </View>
   );
 };
