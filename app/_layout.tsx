@@ -35,12 +35,16 @@ export default function RootLayout() {
   return (
     <ApolloProvider client={client}>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        <Stack>
+        {/* <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen
             name="modal"
             options={{ presentation: 'modal', title: 'Modal' }}
           />
+        </Stack> */}
+        <Stack>
+          <Stack.Screen name="home" />
+          <Stack.Screen name="explore" />
         </Stack>
         <StatusBar style="auto" />
       </ThemeProvider>

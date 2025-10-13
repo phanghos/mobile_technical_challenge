@@ -6,10 +6,9 @@ import {
   ListRenderItem,
   View,
 } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import type { City } from '../core/entities/City';
 
 import { useFetchCities } from '@/hooks/useFetchCities';
+import type { City } from './core/entities/City';
 
 const renderItem: ListRenderItem<City> = ({ item }) => {
   return <CityView city={item} />;
@@ -23,13 +22,15 @@ export default function HomeScreen() {
   const { data, loading, error } = useFetchCities();
 
   return (
-    <SafeAreaView style={{ flex: 1, padding: 16 }}>
+    <View style={{ flex: 1 }}>
       {data && (
         <FlatList
-          data={data.allCities}
+          data={data}
           renderItem={renderItem}
           keyExtractor={keyExtractor}
           ItemSeparatorComponent={ItemSeparator}
+          contentContainerStyle={{ padding: 16, paddingBottom: 48 }}
+          scrollIndicatorInsets={{ top: 16 }}
         />
       )}
       {loading && (
@@ -41,6 +42,6 @@ export default function HomeScreen() {
           <ActivityIndicator size={'large'} />
         </View>
       )}
-    </SafeAreaView>
+    </View>
   );
 }
