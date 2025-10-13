@@ -13,7 +13,7 @@ export default function HomeScreen() {
       {data && (
         <CityList
           cities={data}
-          contentContainerStyle={{ padding: 16, paddingBottom: 48 }}
+          contentContainerStyle={{ paddingHorizontal: 16, paddingBottom: 32 }}
           scrollIndicatorInsets={{ top: 16 }}
         />
       )}

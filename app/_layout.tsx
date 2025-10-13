@@ -11,6 +11,7 @@ import { useColorScheme } from '@/hooks/use-color-scheme';
 import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
 import { ApolloProvider } from '@apollo/client/react';
 import Constants from 'expo-constants';
+import { PaperProvider } from 'react-native-paper';
 
 export function getGraphqlUrl(port = 4000) {
   const debuggerHost =
@@ -35,18 +36,30 @@ export default function RootLayout() {
   return (
     <ApolloProvider client={client}>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        {/* <Stack>
+        <PaperProvider>
+          {/* <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen
             name="modal"
             options={{ presentation: 'modal', title: 'Modal' }}
           />
         </Stack> */}
-        <Stack>
-          <Stack.Screen name="home" />
-          <Stack.Screen name="explore" />
-        </Stack>
-        <StatusBar style="auto" />
+          <Stack>
+            <Stack.Screen
+              name="home"
+              options={{
+                headerTitle: 'Home',
+              }}
+            />
+            <Stack.Screen
+              name="city-details"
+              options={{
+                headerTitle: 'City Details',
+              }}
+            />
+          </Stack>
+          <StatusBar style="auto" />
+        </PaperProvider>
       </ThemeProvider>
     </ApolloProvider>
   );
