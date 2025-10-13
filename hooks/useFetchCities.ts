@@ -1,5 +1,5 @@
 import type { AllCities } from '@/app/core/entities/AllCities';
-import { City } from '@/app/core/entities/City';
+import type { City } from '@/app/core/entities/City';
 import { CurrencyUtils } from '@/app/core/utils/currency';
 import { LanguageUtils } from '@/app/core/utils/language';
 import { GET_CITIES } from '@/app/graphql/queries';
