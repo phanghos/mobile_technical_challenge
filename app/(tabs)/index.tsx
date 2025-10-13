@@ -7,6 +7,10 @@ import type { City } from '../core/entities/City';
 import { GET_CITIES } from '../graphql/queries';
 import { useFetch } from '../useFetch';
 
+const keyExtractor = (city: City) => `${city.id}`;
+
+const ItemSeparator = () => <View style={{ marginVertical: 8 }} />;
+
 export default function HomeScreen() {
   const { data, error, loading } = useFetch<AllCities>(GET_CITIES);
 
@@ -20,8 +24,8 @@ export default function HomeScreen() {
               <Text>{`${item.name}`}</Text>
             </View>
           )}
-          keyExtractor={(city: City) => `${city.id}`}
-          ItemSeparatorComponent={() => <View style={{ marginVertical: 8 }} />}
+          keyExtractor={keyExtractor}
+          ItemSeparatorComponent={ItemSeparator}
         />
       )}
       {loading && (
