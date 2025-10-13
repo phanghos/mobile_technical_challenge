@@ -1,21 +1,14 @@
 import React from 'react';
 import { ActivityIndicator, FlatList, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import type { AllCities } from '../core/entities/AllCities';
+import type { City } from '../core/entities/City';
 
 import { GET_CITIES } from '../graphql/queries';
 import { useFetch } from '../useFetch';
 
-type QueryType = {
-  allCities: [
-    {
-      id: number;
-      name: string;
-    },
-  ];
-};
-
 export default function HomeScreen() {
-  const { data, error, loading } = useFetch<QueryType>(GET_CITIES);
+  const { data, error, loading } = useFetch<AllCities>(GET_CITIES);
 
   return (
     <SafeAreaView style={{ flex: 1, padding: 16 }}>
@@ -27,7 +20,7 @@ export default function HomeScreen() {
               <Text>{`${item.name}`}</Text>
             </View>
           )}
-          keyExtractor={(city: any) => `${city.id}`}
+          keyExtractor={(city: City) => `${city.id}`}
           ItemSeparatorComponent={() => <View style={{ marginVertical: 8 }} />}
         />
       )}
