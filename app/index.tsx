@@ -4,11 +4,13 @@ import { CityList } from '@/components/CityList';
 import { ErrorView } from '@/components/ErrorView';
 import { FullScreenSpinner } from '@/components/FullScreenSpinner';
 import { useFetchCities } from '@/hooks/useFetchCities';
+import { useCityStore } from '@/stores/useCityStore';
 
 export default function HomeScreen() {
-  const { data, loading, error, refetch } = useFetchCities();
+  const { loading, error, refetch } = useFetchCities();
+  const cities = useCityStore(s => s.cities);
 
-  if (error) {
+  if (error && !cities.length) {
     return (
       <ErrorView
         title="Oops!"
@@ -26,7 +28,7 @@ export default function HomeScreen() {
 
   return (
     <CityList
-      cities={data || []}
+      cities={cities}
       contentContainerStyle={{ paddingHorizontal: 16, paddingBottom: 32 }}
       scrollIndicatorInsets={{ top: 16 }}
     />

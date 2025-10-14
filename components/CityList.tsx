@@ -49,7 +49,7 @@ export const CityList = ({ cities, ...flatListProps }: CityListProps) => {
     return cities.filter(it =>
       it.name.toLowerCase().includes(searchQuery.toLowerCase()),
     );
-  }, [searchQuery]);
+  }, [cities, searchQuery]);
 
   const onChangeText = (text: string) => setSearchQuery(text.trimStart());
 
