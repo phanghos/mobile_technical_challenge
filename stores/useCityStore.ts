@@ -8,9 +8,9 @@ type CityStoreState = {
 };
 
 export const useCityStore = create<CityStoreState>()(
-  persist(
+  persist<CityStoreState>(
     () => ({
-      cities: [] as City[],
+      cities: [],
     }),
     {
       name: 'city-store',
