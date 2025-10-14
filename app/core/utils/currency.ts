@@ -1,7 +1,9 @@
-const getCurrency = (code: string) => {
-  return code.charAt(0).toUpperCase() + code.slice(1).toLowerCase();
+import { StringUtils } from './strings';
+
+const formatCurrency = (code: string) => {
+  return StringUtils.capitalize(code);
 };
 
 export const CurrencyUtils = {
-  getCurrency,
+  formatCurrency,
 };
