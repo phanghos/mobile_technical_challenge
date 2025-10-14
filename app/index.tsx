@@ -15,6 +15,7 @@ export default function HomeScreen() {
         description="Something went wrong..."
         ctaText="Retry"
         onPress={refetch}
+        disabled={loading}
       />
     );
   }

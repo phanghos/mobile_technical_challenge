@@ -6,6 +6,7 @@ import { EmptyList } from './EmptyList';
 type ErrorViewProps = {
   ctaText?: string;
   onPress?: () => void;
+  disabled?: boolean;
 } & React.ComponentProps<typeof EmptyList>;
 
 export const ErrorView = ({
@@ -13,6 +14,7 @@ export const ErrorView = ({
   description,
   ctaText,
   onPress,
+  disabled = false,
 }: ErrorViewProps) => {
   const shouldRenderButton = Boolean(ctaText && onPress);
 
@@ -21,7 +23,11 @@ export const ErrorView = ({
       <Text style={styles.title}>{title}</Text>
       <Text style={styles.description}>{description}</Text>
       {shouldRenderButton && (
-        <Button mode="outlined" onPress={onPress} style={{ marginTop: 16 }}>
+        <Button
+          mode="outlined"
+          onPress={onPress}
+          style={{ marginTop: 16 }}
+          disabled={disabled}>
           {ctaText}
         </Button>
       )}

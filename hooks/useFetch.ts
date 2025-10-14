@@ -5,16 +5,20 @@ export type UseFetchReturn<T> = {
   data: T | undefined;
   loading: boolean;
   error: Error | undefined;
-  refetch: () => void;
+  refetch: () => Promise<void>;
 };
 
 export const useFetch = <T>(query: DocumentNode): UseFetchReturn<T> => {
-  const { data, loading, error, refetch } = useQuery<T>(query);
+  const { data, loading, error, refetch } = useQuery<T>(query, {
+    errorPolicy: 'all',
+  });
 
   return {
     data: data ?? undefined,
     loading,
     error: error ?? undefined,
-    refetch,
+    refetch: async () => {
+      await refetch();
+    },
   };
 };
