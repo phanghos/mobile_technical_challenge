@@ -5,4 +5,5 @@ export type City = {
   nativeName: string;
   currency: string;
   language: string;
+  fullLanguage: string;
 };
