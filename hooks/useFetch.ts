@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client/react';
 import type { DocumentNode } from 'graphql';
 
-type UseFetchReturn<T> = {
+export type UseFetchReturn<T> = {
   data: T | undefined;
   loading: boolean;
   error: Error | undefined;

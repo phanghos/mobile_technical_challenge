@@ -12,8 +12,8 @@ export const useFetchCities = () => {
     ...result,
     data: result.data?.allCities.map<City>(it => ({
       ...it,
-      language: LanguageUtils.getLanguage(it.language),
-      currency: CurrencyUtils.getCurrency(it.currency),
+      currency: CurrencyUtils.formatCurrency(it.currency),
+      fullLanguage: LanguageUtils.getFullLanguage(it.language),
     })),
   };
 };
