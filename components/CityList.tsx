@@ -7,15 +7,16 @@ import Animated, { SlideInLeft } from 'react-native-reanimated';
 import { CityView } from './CityView';
 import { EmptyList } from './EmptyList';
 
+const ANIMATION_DELAY = 50;
+
 const renderItem =
   (onPress: (city: City) => void): ListRenderItem<City> =>
-  ({ item, index }) => {
-    return (
-      <Animated.View entering={SlideInLeft.delay(index * 50)}>
+  ({ item, index }) =>
+    (
+      <Animated.View entering={SlideInLeft.delay(index * ANIMATION_DELAY)}>
         <CityView city={item} onPress={onPress} />
       </Animated.View>
     );
-  };
 
 const keyExtractor = (city: City) => `${city.id}`;
 
@@ -52,7 +53,8 @@ export const CityList = ({ cities, ...flatListProps }: CityListProps) => {
 
   const onChangeText = (text: string) => setSearchQuery(text.trimStart());
 
-  const onPressCity = (city: City) => navigate('city-details');
+  const navigateToCityDetails = (city: City) =>
+    navigate('city-details', { city });
 
   return (
     <View style={{ flex: 1 }}>
@@ -64,7 +66,7 @@ export const CityList = ({ cities, ...flatListProps }: CityListProps) => {
       />
       <FlatList
         data={filteredCities}
-        renderItem={renderItem(onPressCity)}
+        renderItem={renderItem(navigateToCityDetails)}
         keyExtractor={keyExtractor}
         ItemSeparatorComponent={ItemSeparator}
         ListEmptyComponent={EmptyListComponent}
