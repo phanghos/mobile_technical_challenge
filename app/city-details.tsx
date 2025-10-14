@@ -1,6 +1,8 @@
+import { useFetchPlacesByKey } from '@/hooks/useFetchPlacesByKey';
 import { useNavigation } from 'expo-router';
-import { useEffect } from 'react';
-import { Dimensions, StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Dimensions, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { SegmentedButtons } from 'react-native-paper';
 import Animated, { FadeIn } from 'react-native-reanimated';
 
 type CellProps = {
@@ -17,6 +19,8 @@ const Cell = ({ title, value }: CellProps) => (
 
 export default function CityDetailsScreen() {
   const navigation = useNavigation();
+  const { data } = useFetchPlacesByKey('amsterdam');
+  const [value, setValue] = useState('restaurant');
 
   useEffect(() => {
     navigation.setOptions({
@@ -41,6 +45,36 @@ export default function CityDetailsScreen() {
         <Cell title="24" value="Restaurants" />
         <Cell title="12" value="Monuments" />
       </View>
+
+      <SegmentedButtons
+        value={value}
+        onValueChange={setValue}
+        buttons={[
+          {
+            value: 'restaurant',
+            label: 'Restaurants',
+          },
+          {
+            value: 'monument',
+            label: 'Monuments',
+          },
+        ]}
+      />
+
+      <ScrollView style={{ marginTop: 16 }}>
+        {!!value &&
+          data
+            ?.filter(it => it.place.type === value)
+            .map(it => {
+              return (
+                <Text
+                  key={it.place.name}
+                  style={{ fontSize: 16, fontWeight: 300 }}>
+                  {it.place.name}
+                </Text>
+              );
+            })}
+      </ScrollView>
     </Animated.View>
   );
 }
