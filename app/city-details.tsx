@@ -102,7 +102,7 @@ export default function CityDetailsScreen() {
       />
 
       <ScrollView style={{ marginTop: 16 }}>
-        {places[value].map(it => {
+        {places?.[value].map(it => {
           return (
             <Text key={it.name} style={{ fontSize: 16, fontWeight: 300 }}>
               {it.name}
