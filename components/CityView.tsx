@@ -22,7 +22,7 @@ export const CityView = ({ city, onPress }: CityViewProps) => (
         fontSize: 16,
         fontWeight: 300,
         marginBottom: 4,
-      }}>{`🌍 Language: ${city.language}`}</Text>
+      }}>{`🌍 Language: ${city.fullLanguage}`}</Text>
     <Text
       style={{
         fontSize: 16,

@@ -1,9 +1,14 @@
+import { FullScreenSpinner } from '@/components/FullScreenSpinner';
 import { useFetchPlacesByKey } from '@/hooks/useFetchPlacesByKey';
+import { RouteProp, useRoute } from '@react-navigation/native';
 import { useNavigation } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { Dimensions, ScrollView, StyleSheet, Text, View } from 'react-native';
-import { SegmentedButtons } from 'react-native-paper';
+import { Button, SegmentedButtons } from 'react-native-paper';
 import Animated, { FadeIn } from 'react-native-reanimated';
+import { City } from './core/entities/City';
+import { PlaceType } from './core/entities/PlaceType';
+import { PlacesUtils } from './core/utils/places';
 
 type CellProps = {
   title: string;
@@ -17,16 +22,37 @@ const Cell = ({ title, value }: CellProps) => (
   </View>
 );
 
+type ScreenRouteProps = {
+  ['city-details']: {
+    city: City;
+  };
+};
+
 export default function CityDetailsScreen() {
-  const navigation = useNavigation();
-  const { data } = useFetchPlacesByKey('amsterdam');
-  const [value, setValue] = useState('restaurant');
+  const { setOptions, navigate } = useNavigation();
+  const {
+    params: { city },
+  } = useRoute<RouteProp<ScreenRouteProps, 'city-details'>>();
+  const { data, loading, error } = useFetchPlacesByKey(city.key);
+  const [value, setValue] = useState<PlaceType>('restaurant');
 
   useEffect(() => {
-    navigation.setOptions({
-      headerTitle: 'Lisbon',
+    setOptions({
+      headerTitle: city.name,
     });
   }, []);
+
+  const showMap = () => {
+    navigate('places-map-view', { places: PlacesUtils.getAllPlaces(data) });
+  };
+
+  if (error) {
+    return null;
+  }
+
+  if (loading) {
+    return <FullScreenSpinner />;
+  }
 
   return (
     <Animated.View entering={FadeIn} style={{ padding: 16 }}>
@@ -35,16 +61,23 @@ export default function CityDetailsScreen() {
           fontSize: 24,
           fontWeight: '700',
           marginBottom: 24,
-        }}>{`Lisbon`}</Text>
+        }}>{`${city.name}`}</Text>
       <View style={styles.container}>
-        <Cell title="Language" value="Portuguese" />
-        <Cell title="Currency" value="Eur" />
+        <Cell title="Language" value={city.fullLanguage} />
+        <Cell title="Currency" value={city.currency} />
       </View>
 
       <View style={styles.container}>
-        <Cell title="24" value="Restaurants" />
-        <Cell title="12" value="Monuments" />
+        <Cell title={`${data?.restaurant.length ?? 0}`} value="Restaurants" />
+        <Cell title={`${data?.monument.length ?? 0}`} value="Monuments" />
       </View>
+
+      <Button
+        mode="contained"
+        onPress={showMap}
+        style={{ marginTop: 8, marginBottom: 16 }}>
+        Explore on map
+      </Button>
 
       <SegmentedButtons
         value={value}
@@ -62,18 +95,14 @@ export default function CityDetailsScreen() {
       />
 
       <ScrollView style={{ marginTop: 16 }}>
-        {!!value &&
-          data
-            ?.filter(it => it.place.type === value)
-            .map(it => {
-              return (
-                <Text
-                  key={it.place.name}
-                  style={{ fontSize: 16, fontWeight: 300 }}>
-                  {it.place.name}
-                </Text>
-              );
-            })}
+        {!!data &&
+          data[value].map(it => {
+            return (
+              <Text key={it.name} style={{ fontSize: 16, fontWeight: 300 }}>
+                {it.name}
+              </Text>
+            );
+          })}
       </ScrollView>
     </Animated.View>
   );
@@ -82,17 +111,11 @@ export default function CityDetailsScreen() {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    // justifyContent: 'space-between', // Push cells to opposite ends
-    // paddingHorizontal: 20,
-    // paddingVertical: 10,
   },
   cell: {
     flexDirection: 'column',
     width: Dimensions.get('screen').width / 2,
     height: Dimensions.get('screen').width / 6,
-
-    // backgroundColor: 'red',
-    // borderWidth: 1,
   },
   rightAlignedCell: {
     // alignItems: 'flex-end', // Align text to the right inside this cell
