@@ -1,8 +1,9 @@
 import { FullScreenSpinner } from '@/components/FullScreenSpinner';
 import { useFetchPlacesByKey } from '@/hooks/useFetchPlacesByKey';
+import { usePlaceStore } from '@/stores/usePlaceStore';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { useNavigation } from 'expo-router';
-import React, { useEffect, useState } from 'react';
+import React, { PropsWithChildren, useEffect, useState } from 'react';
 import { Dimensions, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Button, SegmentedButtons } from 'react-native-paper';
 import Animated, { FadeIn } from 'react-native-reanimated';
@@ -22,6 +23,10 @@ const Cell = ({ title, value }: CellProps) => (
   </View>
 );
 
+const Row = ({ children }: PropsWithChildren<{}>) => (
+  <View style={styles.container}>{children}</View>
+);
+
 type ScreenRouteProps = {
   ['city-details']: {
     city: City;
@@ -33,7 +38,8 @@ export default function CityDetailsScreen() {
   const {
     params: { city },
   } = useRoute<RouteProp<ScreenRouteProps, 'city-details'>>();
-  const { data, loading, error } = useFetchPlacesByKey(city.key);
+  const { loading, error } = useFetchPlacesByKey(city.key);
+  const places = usePlaceStore(s => s.places)[city.key];
   const [value, setValue] = useState<PlaceType>('restaurant');
 
   useEffect(() => {
@@ -43,7 +49,7 @@ export default function CityDetailsScreen() {
   }, []);
 
   const showMap = () => {
-    navigate('places-map-view', { places: PlacesUtils.getAllPlaces(data) });
+    navigate('places-map-view', { places: PlacesUtils.getAllPlaces(places) });
   };
 
   if (error) {
@@ -62,15 +68,16 @@ export default function CityDetailsScreen() {
           fontWeight: '700',
           marginBottom: 24,
         }}>{`${city.name}`}</Text>
-      <View style={styles.container}>
+
+      <Row>
         <Cell title="Language" value={city.fullLanguage} />
         <Cell title="Currency" value={city.currency} />
-      </View>
+      </Row>
 
-      <View style={styles.container}>
-        <Cell title={`${data?.restaurant.length ?? 0}`} value="Restaurants" />
-        <Cell title={`${data?.monument.length ?? 0}`} value="Monuments" />
-      </View>
+      <Row>
+        <Cell title={`${places?.restaurant.length ?? 0}`} value="Restaurants" />
+        <Cell title={`${places?.monument.length ?? 0}`} value="Monuments" />
+      </Row>
 
       <Button
         mode="contained"
@@ -95,14 +102,13 @@ export default function CityDetailsScreen() {
       />
 
       <ScrollView style={{ marginTop: 16 }}>
-        {!!data &&
-          data[value].map(it => {
-            return (
-              <Text key={it.name} style={{ fontSize: 16, fontWeight: 300 }}>
-                {it.name}
-              </Text>
-            );
-          })}
+        {places[value].map(it => {
+          return (
+            <Text key={it.name} style={{ fontSize: 16, fontWeight: 300 }}>
+              {it.name}
+            </Text>
+          );
+        })}
       </ScrollView>
     </Animated.View>
   );
@@ -116,9 +122,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     width: Dimensions.get('screen').width / 2,
     height: Dimensions.get('screen').width / 6,
-  },
-  rightAlignedCell: {
-    // alignItems: 'flex-end', // Align text to the right inside this cell
   },
   title: {
     fontSize: 16,

@@ -5,19 +5,19 @@ import { useEffect } from 'react';
 import { useFetch } from './useFetch';
 
 export const useFetchCities = () => {
-  const result = useFetch<AllCities>(GET_CITIES);
+  const { loading, data, error, refetch } = useFetch<AllCities>(GET_CITIES);
 
   useEffect(() => {
-    if (result.data) {
-      setCities(result.data.allCities);
+    if (data) {
+      setCities(data.allCities);
     }
-  }, [result.data]);
+  }, [data]);
 
   return {
-    loading: result.loading,
-    error: result.error,
+    loading,
+    error,
     refetch: async () => {
-      await result.refetch();
+      await refetch();
     },
   };
 };

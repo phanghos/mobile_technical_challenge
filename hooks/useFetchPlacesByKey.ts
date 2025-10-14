@@ -1,15 +1,21 @@
-import { PlacesMap } from '@/app/core/entities/PlacesMap';
-import { PlacesUtils } from '@/app/core/utils/places';
-import { UseFetchReturn } from './useFetch';
+import { setPlacesForCity } from '@/domain/place/actions/setPlacesForCity';
+import { useEffect } from 'react';
 import { useFetchPlaces } from './useFetchPlaces';
 
-export const useFetchPlacesByKey = (
-  cityKey: string,
-): UseFetchReturn<PlacesMap> => {
-  const result = useFetchPlaces();
+export const useFetchPlacesByKey = (cityKey: string) => {
+  const { loading, data, error, refetch } = useFetchPlaces();
+
+  useEffect(() => {
+    if (data) {
+      setPlacesForCity(data, cityKey);
+    }
+  }, [data]);
 
   return {
-    ...result,
-    data: PlacesUtils.getPlacesForCityByType(cityKey, result.data || []),
+    loading,
+    error,
+    refetch: async () => {
+      await refetch();
+    },
   };
 };
