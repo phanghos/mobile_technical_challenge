@@ -1,3 +1,4 @@
+import { ErrorView } from '@/components/ErrorView';
 import { FullScreenSpinner } from '@/components/FullScreenSpinner';
 import { PlacesList } from '@/components/PlacesList';
 import { City } from '@/domain/city/entities/City';
@@ -38,8 +39,9 @@ export default function CityDetailsScreen() {
   const {
     params: { city },
   } = useRoute<RouteProp<ScreenRouteProps, 'city-details'>>();
-  const { loading, error } = useFetchPlaces();
+  const { loading, error, refetch } = useFetchPlaces();
   const placesMap = useSelectPlacesForCity(city.key);
+  const hasData = !!!Object.keys(placesMap).length;
 
   useEffect(() => {
     setOptions({
@@ -53,11 +55,19 @@ export default function CityDetailsScreen() {
     });
   };
 
-  if (error) {
-    return null;
+  if (error && !hasData) {
+    return (
+      <ErrorView
+        title="Oops!"
+        description="Something went wrong..."
+        ctaText="Retry"
+        onPress={refetch}
+        disabled={loading}
+      />
+    );
   }
 
-  if (loading) {
+  if (loading && !hasData) {
     return <FullScreenSpinner />;
   }
 
