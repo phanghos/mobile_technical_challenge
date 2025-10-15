@@ -1,8 +1,9 @@
 import { FullScreenSpinner } from '@/components/FullScreenSpinner';
 import { PlacesList } from '@/components/PlacesList';
-import type { City } from '@/domain/entities/City';
-import { useFetchPlacesByKey } from '@/hooks/useFetchPlacesByKey';
-import { usePlaceStore } from '@/stores/usePlaceStore';
+import { City } from '@/domain/city/entities/City';
+import { selectPlacesForCity } from '@/domain/place/store/selectors/selectPlacesForCity';
+import { usePlaceStore } from '@/domain/place/store/usePlaceStore';
+import { useFetchPlaces } from '@/domain/place/useCases/useFetchPlaces';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { useNavigation } from 'expo-router';
 import React, { PropsWithChildren, useEffect } from 'react';
@@ -38,8 +39,8 @@ export default function CityDetailsScreen() {
   const {
     params: { city },
   } = useRoute<RouteProp<ScreenRouteProps, 'city-details'>>();
-  const { loading, error } = useFetchPlacesByKey(city.key);
-  const places = usePlaceStore(s => s.places)[city.key];
+  const { loading, error } = useFetchPlaces();
+  const places = usePlaceStore(selectPlacesForCity(city.key));
 
   useEffect(() => {
     setOptions({

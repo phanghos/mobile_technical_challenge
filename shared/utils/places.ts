@@ -1,6 +1,6 @@
-import { Place, PlaceInfo } from '@/domain/entities/Place';
-import { PlacesMap } from '@/domain/entities/PlacesMap';
-import { PlaceType } from '@/domain/entities/PlaceType';
+import type { Place, PlaceInfo } from '@/domain/place/entities/Place';
+import type { PlacesMap } from '@/domain/place/entities/PlacesMap';
+import type { PlaceType } from '@/domain/place/entities/PlaceType';
 
 const getPlacesForCityByType = (cityKey: string, places: Place[]): PlacesMap =>
   places.reduce((acc, cur) => {

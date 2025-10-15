@@ -1,6 +1,6 @@
-import { setCities } from '@/domain/city/actions/setCities';
-import { City } from '@/domain/entities/City';
-import { useCityStore } from '@/stores/useCityStore';
+import { City } from '@/domain/city/entities/City';
+import { setCities } from '@/domain/city/store/actions/setCities';
+import { useCityStore } from '@/domain/city/store/useCityStore';
 
 describe('setCities', () => {
   it('initial state', () => {

@@ -1,4 +1,4 @@
-import type { City } from '@/domain/entities/City';
+import type { City } from '@/domain/city/entities/City';
 import { CurrencyUtils } from '@/shared/utils/currency';
 import { LanguageUtils } from '@/shared/utils/language';
 

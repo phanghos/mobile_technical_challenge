@@ -1,4 +1,4 @@
-import type { City } from '@/domain/entities/City';
+import type { City } from '@/domain/city/entities/City';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';

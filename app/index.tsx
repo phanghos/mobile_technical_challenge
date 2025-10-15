@@ -3,8 +3,8 @@ import React from 'react';
 import { CityList } from '@/components/CityList';
 import { ErrorView } from '@/components/ErrorView';
 import { FullScreenSpinner } from '@/components/FullScreenSpinner';
-import { useFetchCities } from '@/hooks/useFetchCities';
-import { useCityStore } from '@/stores/useCityStore';
+import { useCityStore } from '@/domain/city/store/useCityStore';
+import { useFetchCities } from '@/domain/city/useCases/useFetchCities';
 
 export default function HomeScreen() {
   const { loading, error, refetch } = useFetchCities();
