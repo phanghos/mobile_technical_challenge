@@ -41,7 +41,7 @@ export const PlacesList = ({ places }: PlacesListProps) => {
       )}
 
       <ScrollView style={styles.listContainer}>
-        {places?.[value].map(it => {
+        {places[value]?.map(it => {
           return (
             <Text key={it.name} style={styles.place}>
               {it.name}

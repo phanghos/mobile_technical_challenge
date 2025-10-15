@@ -87,10 +87,10 @@ export default function CityDetailsScreen() {
 
       <Row>
         <Cell
-          title={`${placesMap?.restaurant.length ?? 0}`}
+          title={`${placesMap.restaurant?.length ?? 0}`}
           value="Restaurants"
         />
-        <Cell title={`${placesMap?.monument.length ?? 0}`} value="Monuments" />
+        <Cell title={`${placesMap.monument?.length ?? 0}`} value="Monuments" />
       </Row>
 
       <Button
