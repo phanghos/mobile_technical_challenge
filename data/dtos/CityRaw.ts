@@ -1,7 +1,8 @@
-export type City = {
+export type CityRaw = {
+  id: number;
   key: string;
   name: string;
+  nativeName: string;
   currency: string;
   language: string;
-  fullLanguage: string;
 };

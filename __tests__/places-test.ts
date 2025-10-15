@@ -1,21 +1,22 @@
 import { Place } from '@/domain/place/entities/Place';
 import { PlacesMap } from '@/domain/place/entities/PlacesMap';
 import { PlacesUtils } from '@/shared/utils/places';
+import { Builder } from 'builder-pattern';
 
 describe('Places Utils', () => {
   describe('getPlacesForCityByType', () => {
     describe('given an existing city key', () => {
       it('returns a map of places indexed by type', () => {
         // Given
-        const places: Place[] = [aRestaurant, aMonument];
+        const places: Place[] = [restaurant, monument];
 
         // When
-        const result = PlacesUtils.getPlacesForCityByType(aCityKey, places);
+        const result = PlacesUtils.getPlacesForCityByType(cityKey, places);
 
         // Then
         expect(result).toStrictEqual({
-          restaurant: [aRestaurant.place],
-          monument: [aMonument.place],
+          restaurant: [restaurant],
+          monument: [monument],
         });
       });
     });
@@ -23,11 +24,11 @@ describe('Places Utils', () => {
     describe('given an non-existing city key', () => {
       it('returns an empty map', () => {
         // Given
-        const places: Place[] = [aRestaurant, aMonument];
+        const places: Place[] = [restaurant, monument];
 
         // When
         const result = PlacesUtils.getPlacesForCityByType(
-          'invalid_key',
+          invalidCityKey,
           places,
         );
 
@@ -41,8 +42,8 @@ describe('Places Utils', () => {
     it('returns an array of all places', () => {
       // Given
       const placesMap: PlacesMap = {
-        restaurant: [aRestaurant.place],
-        monument: [aMonument.place],
+        restaurant: [restaurant],
+        monument: [monument],
       };
 
       // When
@@ -50,7 +51,7 @@ describe('Places Utils', () => {
 
       // Then
       expect(result).toHaveLength(2);
-      expect(result).toStrictEqual([aRestaurant.place, aMonument.place]);
+      expect(result).toStrictEqual([restaurant, monument]);
     });
   });
 
@@ -58,8 +59,8 @@ describe('Places Utils', () => {
     it('returns the type of the first place in the list', () => {
       // Given
       const placesMap: PlacesMap = {
-        restaurant: [aRestaurant.place],
-        monument: [aMonument.place],
+        restaurant: [restaurant],
+        monument: [monument],
       };
 
       // When
@@ -74,8 +75,8 @@ describe('Places Utils', () => {
     it('returns the number of different types of places', () => {
       // Given
       const placesMap: PlacesMap = {
-        restaurant: [aRestaurant.place],
-        monument: [aMonument.place],
+        restaurant: [restaurant],
+        monument: [monument],
       };
 
       // When
@@ -87,20 +88,7 @@ describe('Places Utils', () => {
   });
 });
 
-const aCityKey = 'barcelona';
-const aRestaurant: Place = {
-  key: aCityKey,
-  place: {
-    type: 'restaurant',
-    name: 'A restaurant',
-    coordinates: [0, 0],
-  },
-};
-const aMonument: Place = {
-  key: aCityKey,
-  place: {
-    type: 'monument',
-    name: 'A monument',
-    coordinates: [0, 0],
-  },
-};
+const cityKey = 'barcelona';
+const invalidCityKey = 'invalid_key';
+const restaurant = Builder<Place>().key(cityKey).type('restaurant').build();
+const monument = Builder<Place>().key(cityKey).type('monument').build();

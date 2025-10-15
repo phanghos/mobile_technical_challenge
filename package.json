@@ -19,6 +19,7 @@
     "@react-navigation/elements": "^2.6.3",
     "@react-navigation/native": "^7.1.8",
     "@testing-library/react": "^16.3.0",
+    "builder-pattern": "^2.2.0",
     "countries-list": "^3.1.1",
     "currency-list": "^1.0.8",
     "expo": "~54.0.13",

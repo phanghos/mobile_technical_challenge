@@ -1,4 +1,4 @@
-import { City } from '@/domain/entities/City';
+import type { City } from '@/domain/city/entities/City';
 import { useNavigation } from 'expo-router';
 import React, { useMemo, useState } from 'react';
 import { FlatList, FlatListProps, ListRenderItem, View } from 'react-native';

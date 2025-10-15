@@ -3,6 +3,7 @@ import { useSelectPlacesForCity } from '@/domain/place/store/selectors/useSelect
 import { usePlaceStore } from '@/domain/place/store/usePlaceStore';
 import { PlacesUtils } from '@/shared/utils/places';
 import { renderHook } from '@testing-library/react-native';
+import { Builder } from 'builder-pattern';
 
 jest.mock('@/shared/utils/places', () => ({
   PlacesUtils: {
@@ -17,37 +18,23 @@ const mockedGetPlacesForCityByType = jest.mocked(
 describe('useSelectPlacesForCity', () => {
   beforeEach(() => {
     usePlaceStore.setState({
-      places: [aRestaurant, aMonument],
+      places: [restaurant, monument],
     });
   });
 
-  it('it calls getPlacesForCityByType internally', () => {
+  it('calls getPlacesForCityByType internally', () => {
     // When
-    const { result } = renderHook(() => useSelectPlacesForCity(aCityKey));
+    const { result } = renderHook(() => useSelectPlacesForCity(cityKey));
 
     // Then
     expect(result.current).toStrictEqual({});
-    expect(mockedGetPlacesForCityByType).toHaveBeenCalledWith(aCityKey, [
-      aRestaurant,
-      aMonument,
+    expect(mockedGetPlacesForCityByType).toHaveBeenCalledWith(cityKey, [
+      restaurant,
+      monument,
     ]);
   });
 });
 
-const aCityKey = 'barcelona';
-const aRestaurant: Place = {
-  key: aCityKey,
-  place: {
-    type: 'restaurant',
-    name: 'A restaurant',
-    coordinates: [0, 0],
-  },
-};
-const aMonument: Place = {
-  key: aCityKey,
-  place: {
-    type: 'monument',
-    name: 'A monument',
-    coordinates: [0, 0],
-  },
-};
+const cityKey = 'barcelona';
+const restaurant = Builder<Place>().type('restaurant').build();
+const monument = Builder<Place>().type('monument').build();

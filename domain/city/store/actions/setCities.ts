@@ -1,9 +1,9 @@
-import type { City } from '@/domain/city/entities/City';
+import type { CityRaw } from '@/data/dtos/CityRaw';
 import { CityStore, useCityStore } from '@/domain/city/store/useCityStore';
 import { cityAdapter, CityAdapter } from '../../adapters/cityAdapter';
 
 export const setCities = (
-  cities: City[],
+  cities: CityRaw[],
   adaptCities: CityAdapter = cityAdapter,
   store: CityStore = useCityStore,
 ) => {

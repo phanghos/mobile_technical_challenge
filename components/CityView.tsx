@@ -1,4 +1,4 @@
-import type { City } from '@/domain/entities/City';
+import type { City } from '@/domain/city/entities/City';
 import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 
