@@ -16,8 +16,6 @@ export const useFetchPlaces = () => {
   return {
     loading,
     error,
-    refetch: async () => {
-      await refetch();
-    },
+    refetch,
   };
 };
