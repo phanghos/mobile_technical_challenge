@@ -1,7 +1,7 @@
 import { FullScreenSpinner } from '@/components/FullScreenSpinner';
 import { PlacesList } from '@/components/PlacesList';
 import { City } from '@/domain/city/entities/City';
-import { useSelectPlacesForCity } from '@/domain/place/store/selectors/selectPlacesForCity';
+import { useSelectPlacesForCity } from '@/domain/place/store/selectors/useSelectPlacesForCity';
 import { useFetchPlaces } from '@/domain/place/useCases/useFetchPlaces';
 import { PlacesUtils } from '@/shared/utils/places';
 import { RouteProp, useRoute } from '@react-navigation/native';
