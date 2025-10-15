@@ -74,6 +74,7 @@ export const CityList = ({ cities, ...flatListProps }: CityListProps) => {
         ListEmptyComponent={EmptyListComponent}
         // to avoid tapping twice on the card when the keyboard is open
         keyboardShouldPersistTaps="always"
+        showsVerticalScrollIndicator={false}
         {...flatListProps}
       />
       {
