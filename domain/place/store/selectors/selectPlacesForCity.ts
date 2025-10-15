@@ -1,6 +1,12 @@
-import type { PlaceStoreState } from '@/domain/place/store/usePlaceStore';
+import { usePlaceStore } from '@/domain/place/store/usePlaceStore';
 import { PlacesUtils } from '@/shared/utils/places';
+import { useMemo } from 'react';
 
-export const selectPlacesForCity =
-  (cityKey: string) => (state: PlaceStoreState) =>
-    PlacesUtils.getPlacesForCityByType(cityKey, state.places);
+export const useSelectPlacesForCity = (cityKey: string) => {
+  const places = usePlaceStore(s => s.places);
+
+  return useMemo(
+    () => PlacesUtils.getPlacesForCityByType(cityKey, places),
+    [cityKey, places],
+  );
+};

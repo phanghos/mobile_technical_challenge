@@ -1,16 +1,15 @@
 import { FullScreenSpinner } from '@/components/FullScreenSpinner';
 import { PlacesList } from '@/components/PlacesList';
 import { City } from '@/domain/city/entities/City';
-import { selectPlacesForCity } from '@/domain/place/store/selectors/selectPlacesForCity';
-import { usePlaceStore } from '@/domain/place/store/usePlaceStore';
+import { useSelectPlacesForCity } from '@/domain/place/store/selectors/selectPlacesForCity';
 import { useFetchPlaces } from '@/domain/place/useCases/useFetchPlaces';
+import { PlacesUtils } from '@/shared/utils/places';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { useNavigation } from 'expo-router';
 import React, { PropsWithChildren, useEffect } from 'react';
 import { Dimensions, StyleSheet, Text, View } from 'react-native';
 import { Button } from 'react-native-paper';
 import Animated, { FadeIn } from 'react-native-reanimated';
-import { PlacesUtils } from '../shared/utils/places';
 
 type CellProps = {
   title: string;
@@ -40,7 +39,7 @@ export default function CityDetailsScreen() {
     params: { city },
   } = useRoute<RouteProp<ScreenRouteProps, 'city-details'>>();
   const { loading, error } = useFetchPlaces();
-  const places = usePlaceStore(selectPlacesForCity(city.key));
+  const placesMap = useSelectPlacesForCity(city.key);
 
   useEffect(() => {
     setOptions({
@@ -49,7 +48,9 @@ export default function CityDetailsScreen() {
   }, []);
 
   const showMap = () => {
-    navigate('places-map-view', { places: PlacesUtils.getAllPlaces(places) });
+    navigate('places-map-view', {
+      places: PlacesUtils.getAllPlaces(placesMap),
+    });
   };
 
   if (error) {
@@ -75,8 +76,11 @@ export default function CityDetailsScreen() {
       </Row>
 
       <Row>
-        <Cell title={`${places?.restaurant.length ?? 0}`} value="Restaurants" />
-        <Cell title={`${places?.monument.length ?? 0}`} value="Monuments" />
+        <Cell
+          title={`${placesMap?.restaurant.length ?? 0}`}
+          value="Restaurants"
+        />
+        <Cell title={`${placesMap?.monument.length ?? 0}`} value="Monuments" />
       </Row>
 
       <Button
@@ -86,7 +90,7 @@ export default function CityDetailsScreen() {
         Explore on map
       </Button>
 
-      <PlacesList places={places} />
+      <PlacesList places={placesMap} />
     </Animated.View>
   );
 }
