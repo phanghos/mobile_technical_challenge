@@ -1,7 +1,18 @@
 import { Place } from '@/domain/place/entities/Place';
 import { useSelectPlacesForCity } from '@/domain/place/store/selectors/useSelectPlacesForCity';
 import { usePlaceStore } from '@/domain/place/store/usePlaceStore';
+import { PlacesUtils } from '@/shared/utils/places';
 import { renderHook } from '@testing-library/react-native';
+
+jest.mock('@/shared/utils/places', () => ({
+  PlacesUtils: {
+    getPlacesForCityByType: jest.fn().mockReturnValue({}),
+  },
+}));
+
+const mockedGetPlacesForCityByType = jest.mocked(
+  PlacesUtils.getPlacesForCityByType,
+);
 
 describe('useSelectPlacesForCity', () => {
   beforeEach(() => {
@@ -10,19 +21,16 @@ describe('useSelectPlacesForCity', () => {
     });
   });
 
-  it('given a existent city key, it returns the map of places indexed by type', () => {
-    const { result } = renderHook(() => useSelectPlacesForCity('barcelona'));
+  it('it calls getPlacesForCityByType internally', () => {
+    // When
+    const { result } = renderHook(() => useSelectPlacesForCity(aCityKey));
 
-    expect(result.current).toStrictEqual({
-      restaurant: [aRestaurant.place],
-      monument: [aMonument.place],
-    });
-  });
-
-  it('given a non-existent city key, it returns an empty map', () => {
-    const { result } = renderHook(() => useSelectPlacesForCity('amsterdam'));
-
+    // Then
     expect(result.current).toStrictEqual({});
+    expect(mockedGetPlacesForCityByType).toHaveBeenCalledWith(aCityKey, [
+      aRestaurant,
+      aMonument,
+    ]);
   });
 });
 

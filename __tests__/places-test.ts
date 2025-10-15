@@ -4,17 +4,35 @@ import { PlacesUtils } from '@/shared/utils/places';
 
 describe('Places Utils', () => {
   describe('getPlacesForCityByType', () => {
-    it('returns a map of places indexed by type', () => {
-      // Given
-      const places: Place[] = [aRestaurant, aMonument];
+    describe('given an existing city key', () => {
+      it('returns a map of places indexed by type', () => {
+        // Given
+        const places: Place[] = [aRestaurant, aMonument];
 
-      // When
-      const result = PlacesUtils.getPlacesForCityByType(aCityKey, places);
+        // When
+        const result = PlacesUtils.getPlacesForCityByType(aCityKey, places);
 
-      // Then
-      expect(result).toStrictEqual({
-        restaurant: [aRestaurant.place],
-        monument: [aMonument.place],
+        // Then
+        expect(result).toStrictEqual({
+          restaurant: [aRestaurant.place],
+          monument: [aMonument.place],
+        });
+      });
+    });
+
+    describe('given an non-existing city key', () => {
+      it('returns an empty map', () => {
+        // Given
+        const places: Place[] = [aRestaurant, aMonument];
+
+        // When
+        const result = PlacesUtils.getPlacesForCityByType(
+          'invalid_key',
+          places,
+        );
+
+        // Then
+        expect(result).toStrictEqual({});
       });
     });
   });
