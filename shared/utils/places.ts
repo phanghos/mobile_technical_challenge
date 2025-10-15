@@ -1,6 +1,6 @@
-import { Place, PlaceInfo } from '../../domain/entities/Place';
-import { PlacesMap } from '../../domain/entities/PlacesMap';
-import { PlaceType } from '../../domain/entities/PlaceType';
+import { Place, PlaceInfo } from '@/domain/entities/Place';
+import { PlacesMap } from '@/domain/entities/PlacesMap';
+import { PlaceType } from '@/domain/entities/PlaceType';
 
 const getPlacesForCityByType = (cityKey: string, places: Place[]): PlacesMap =>
   places.reduce((acc, cur) => {
@@ -20,7 +20,15 @@ const getAllPlaces = (placesMap: PlacesMap): PlaceInfo[] =>
     [] as PlaceInfo[],
   );
 
+const getTypeOfFirstPlace = (placesMap: PlacesMap): PlaceType | undefined =>
+  Object.keys(placesMap)[0] as PlaceType | undefined;
+
+const getTypesOfPlacesCount = (placesMap: PlacesMap): number =>
+  Object.keys(placesMap).length;
+
 export const PlacesUtils = {
   getPlacesForCityByType,
   getAllPlaces,
+  getTypeOfFirstPlace,
+  getTypesOfPlacesCount,
 };

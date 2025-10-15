@@ -1,14 +1,14 @@
 import { FullScreenSpinner } from '@/components/FullScreenSpinner';
+import { PlacesList } from '@/components/PlacesList';
+import type { City } from '@/domain/entities/City';
 import { useFetchPlacesByKey } from '@/hooks/useFetchPlacesByKey';
 import { usePlaceStore } from '@/stores/usePlaceStore';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { useNavigation } from 'expo-router';
-import React, { PropsWithChildren, useEffect, useState } from 'react';
-import { Dimensions, ScrollView, StyleSheet, Text, View } from 'react-native';
-import { Button, SegmentedButtons } from 'react-native-paper';
+import React, { PropsWithChildren, useEffect } from 'react';
+import { Dimensions, StyleSheet, Text, View } from 'react-native';
+import { Button } from 'react-native-paper';
 import Animated, { FadeIn } from 'react-native-reanimated';
-import { City } from '../domain/entities/City';
-import { PlaceType } from '../domain/entities/PlaceType';
 import { PlacesUtils } from '../shared/utils/places';
 
 type CellProps = {
@@ -40,7 +40,6 @@ export default function CityDetailsScreen() {
   } = useRoute<RouteProp<ScreenRouteProps, 'city-details'>>();
   const { loading, error } = useFetchPlacesByKey(city.key);
   const places = usePlaceStore(s => s.places)[city.key];
-  const [value, setValue] = useState<PlaceType>('restaurant');
 
   useEffect(() => {
     setOptions({
@@ -86,30 +85,7 @@ export default function CityDetailsScreen() {
         Explore on map
       </Button>
 
-      <SegmentedButtons
-        value={value}
-        onValueChange={setValue}
-        buttons={[
-          {
-            value: 'restaurant',
-            label: 'Restaurants',
-          },
-          {
-            value: 'monument',
-            label: 'Monuments',
-          },
-        ]}
-      />
-
-      <ScrollView style={{ marginTop: 16 }}>
-        {places?.[value].map(it => {
-          return (
-            <Text key={it.name} style={{ fontSize: 16, fontWeight: 300 }}>
-              {it.name}
-            </Text>
-          );
-        })}
-      </ScrollView>
+      <PlacesList places={places} />
     </Animated.View>
   );
 }
