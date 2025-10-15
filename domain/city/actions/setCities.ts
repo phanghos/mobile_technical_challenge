@@ -1,4 +1,4 @@
-import type { City } from '@/app/core/entities/City';
+import type { City } from '@/domain/entities/City';
 import { CityStore, useCityStore } from '@/stores/useCityStore';
 import { cityAdapter, CityAdapter } from '../adapters/cityAdapter';
 

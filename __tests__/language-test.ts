@@ -1,4 +1,4 @@
-import { LanguageUtils } from '@/app/core/utils/language';
+import { LanguageUtils } from '@/shared/utils/language';
 
 describe('LanguageUtils', () => {
   it('Returns the first language spoken', () => {

@@ -1,5 +1,5 @@
-import type { AllPlaces } from '@/app/core/entities/AllPlaces';
-import { GET_PLACES } from '@/app/graphql/queries';
+import { GET_PLACES } from '@/data/graphql/queries';
+import type { AllPlaces } from '@/domain/entities/AllPlaces';
 import { useFetch } from './useFetch';
 
 export const useFetchPlaces = () => {

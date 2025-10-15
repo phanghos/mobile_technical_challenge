@@ -1,4 +1,4 @@
-import { StringUtils } from '@/app/core/utils/strings';
+import { StringUtils } from '@/shared/utils/strings';
 
 describe('String Utils', () => {
   describe('capitalize', () => {

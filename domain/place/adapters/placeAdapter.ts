@@ -1,6 +1,6 @@
-import type { Place } from '@/app/core/entities/Place';
-import type { PlacesMap } from '@/app/core/entities/PlacesMap';
-import { PlacesUtils } from '@/app/core/utils/places';
+import type { Place } from '@/domain/entities/Place';
+import type { PlacesMap } from '@/domain/entities/PlacesMap';
+import { PlacesUtils } from '@/shared/utils/places';
 
 export const placeAdapter = (places: Place[], cityKey: string): PlacesMap => {
   return PlacesUtils.getPlacesForCityByType(cityKey, places || []);

@@ -1,4 +1,4 @@
-import type { Place } from '@/app/core/entities/Place';
+import type { Place } from '@/domain/entities/Place';
 import { PlaceStore, usePlaceStore } from '@/stores/usePlaceStore';
 import { placeAdapter, PlaceAdapter } from '../adapters/placeAdapter';
 

@@ -1,5 +1,5 @@
-import { City } from '@/app/core/entities/City';
 import { setCities } from '@/domain/city/actions/setCities';
+import { City } from '@/domain/entities/City';
 import { useCityStore } from '@/stores/useCityStore';
 
 describe('setCities', () => {

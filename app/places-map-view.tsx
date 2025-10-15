@@ -1,11 +1,11 @@
 import { RouteProp, useRoute } from '@react-navigation/native';
 import React, { useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
-import type { PlaceInfo } from './core/entities/Place';
+import type { PlaceInfo } from '../domain/entities/Place';
 
 import { useNavigation } from 'expo-router';
 import MapView, { Marker } from 'react-native-maps';
-import { StringUtils } from './core/utils/strings';
+import { StringUtils } from '../shared/utils/strings';
 
 type ScreenRouteProps = {
   ['places-map-view']: {

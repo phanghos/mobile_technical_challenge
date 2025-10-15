@@ -1,4 +1,4 @@
-import type { PlacesMap } from '@/app/core/entities/PlacesMap';
+import type { PlacesMap } from '@/domain/entities/PlacesMap';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';

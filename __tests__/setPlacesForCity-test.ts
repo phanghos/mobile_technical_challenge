@@ -1,4 +1,4 @@
-import { Place } from '@/app/core/entities/Place';
+import { Place } from '@/domain/entities/Place';
 import { setPlacesForCity } from '@/domain/place/actions/setPlacesForCity';
 import { usePlaceStore } from '@/stores/usePlaceStore';
 

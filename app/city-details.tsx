@@ -7,9 +7,9 @@ import React, { PropsWithChildren, useEffect, useState } from 'react';
 import { Dimensions, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Button, SegmentedButtons } from 'react-native-paper';
 import Animated, { FadeIn } from 'react-native-reanimated';
-import { City } from './core/entities/City';
-import { PlaceType } from './core/entities/PlaceType';
-import { PlacesUtils } from './core/utils/places';
+import { City } from '../domain/entities/City';
+import { PlaceType } from '../domain/entities/PlaceType';
+import { PlacesUtils } from '../shared/utils/places';
 
 type CellProps = {
   title: string;

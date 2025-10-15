@@ -1,6 +1,6 @@
-import type { City } from '@/app/core/entities/City';
-import { CurrencyUtils } from '@/app/core/utils/currency';
-import { LanguageUtils } from '@/app/core/utils/language';
+import type { City } from '@/domain/entities/City';
+import { CurrencyUtils } from '@/shared/utils/currency';
+import { LanguageUtils } from '@/shared/utils/language';
 
 export const cityAdapter = (cities: City[]): City[] =>
   cities.map<City>(it => ({
