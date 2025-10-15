@@ -47,9 +47,16 @@ export default function RootLayout() {
               }}
             />
             <Stack.Screen
-              name="places-map-view"
+              name="places-map"
               options={{
                 headerTitle: 'Map View',
+              }}
+            />
+            <Stack.Screen
+              name="filter"
+              options={{
+                headerTitle: 'Filter',
+                presentation: 'modal',
               }}
             />
           </Stack>

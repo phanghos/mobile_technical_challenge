@@ -50,7 +50,7 @@ export default function CityDetailsScreen() {
   }, []);
 
   const showMap = () => {
-    navigate('places-map-view', {
+    navigate('places-map', {
       places: PlacesUtils.getAllPlaces(placesMap),
     });
   };

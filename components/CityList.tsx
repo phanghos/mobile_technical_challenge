@@ -2,7 +2,7 @@ import type { City } from '@/domain/city/entities/City';
 import { useNavigation } from 'expo-router';
 import React, { useMemo, useState } from 'react';
 import { FlatList, FlatListProps, ListRenderItem, View } from 'react-native';
-import { Searchbar } from 'react-native-paper';
+import { Button, Searchbar } from 'react-native-paper';
 import Animated, { SlideInLeft } from 'react-native-reanimated';
 import { CityView } from './CityView';
 import { EmptyList } from './EmptyList';
@@ -18,7 +18,7 @@ const renderItem =
       </Animated.View>
     );
 
-const keyExtractor = (city: City) => `${city.id}`;
+const keyExtractor = (city: City) => `${city.key}`;
 
 const ItemSeparator = () => <View style={{ marginVertical: 8 }} />;
 
@@ -56,6 +56,8 @@ export const CityList = ({ cities, ...flatListProps }: CityListProps) => {
   const navigateToCityDetails = (city: City) =>
     navigate('city-details', { city });
 
+  const navigateToFilter = () => navigate('filter');
+
   return (
     <View style={{ flex: 1 }}>
       <Searchbar
@@ -74,6 +76,23 @@ export const CityList = ({ cities, ...flatListProps }: CityListProps) => {
         keyboardShouldPersistTaps="always"
         {...flatListProps}
       />
+      {
+        <View
+          style={{
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+          <Button
+            mode="contained"
+            onPress={navigateToFilter}
+            style={{
+              position: 'absolute',
+              bottom: 36,
+            }}>
+            Filter
+          </Button>
+        </View>
+      }
     </View>
   );
 };

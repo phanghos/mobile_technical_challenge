@@ -2,14 +2,14 @@ import { RouteProp, useRoute } from '@react-navigation/native';
 import React, { useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import { PlaceInfo } from '@/domain/place/entities/Place';
+import type { Place } from '@/domain/place/entities/Place';
 import { useNavigation } from 'expo-router';
 import MapView, { Marker } from 'react-native-maps';
 import { StringUtils } from '../shared/utils/strings';
 
 type ScreenRouteProps = {
   ['places-map-view']: {
-    places: PlaceInfo[];
+    places: Place[];
   };
 };
 
