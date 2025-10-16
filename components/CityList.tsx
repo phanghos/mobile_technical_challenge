@@ -30,6 +30,13 @@ const EmptyListComponent = () => (
   />
 );
 
+const NoFilterResultsComponent = () => (
+  <EmptyList
+    title="Oops!"
+    description="Looks like there are no results after applying the selected filters"
+  />
+);
+
 type ExcludedFlatListProps =
   | 'data'
   | 'renderItem'
@@ -38,9 +45,14 @@ type ExcludedFlatListProps =
 
 type CityListProps = {
   cities: City[];
+  hasFiltersApplied: boolean;
 } & Omit<FlatListProps<City>, ExcludedFlatListProps>;
 
-export const CityList = ({ cities, ...flatListProps }: CityListProps) => {
+export const CityList = ({
+  cities,
+  hasFiltersApplied,
+  ...flatListProps
+}: CityListProps) => {
   const { navigate } = useNavigation();
   const [searchQuery, setSearchQuery] = useState('');
   const filteredCities = useMemo(() => {
@@ -57,8 +69,6 @@ export const CityList = ({ cities, ...flatListProps }: CityListProps) => {
   const navigateToCityDetails = (city: City) =>
     navigate('city-details', { city });
 
-  const navigateToFilter = () => navigate('filter');
-
   return (
     <View style={{ flex: 1 }}>
       <Searchbar
@@ -72,7 +82,9 @@ export const CityList = ({ cities, ...flatListProps }: CityListProps) => {
         renderItem={renderItem(navigateToCityDetails)}
         keyExtractor={keyExtractor}
         ItemSeparatorComponent={ItemSeparator}
-        ListEmptyComponent={EmptyListComponent}
+        ListEmptyComponent={
+          hasFiltersApplied ? NoFilterResultsComponent : EmptyList
+        }
         // to avoid tapping twice on the card when the keyboard is open
         keyboardShouldPersistTaps="always"
         showsVerticalScrollIndicator={false}

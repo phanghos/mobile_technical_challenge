@@ -7,6 +7,7 @@ import { useCityStore } from '@/domain/city/store/useCityStore';
 import { useFetchCities } from '@/domain/city/useCases/useFetchCities';
 import { useFilterStore } from '@/domain/filter/store/useFilterStore';
 import { applyFiltersToCities } from '@/domain/filter/utils/applyFiltersToCities';
+import { hasFiltersApplied } from '@/domain/filter/utils/hasFiltersApplied';
 
 export default function HomeScreen() {
   const { loading, error, refetch } = useFetchCities();
@@ -35,6 +36,7 @@ export default function HomeScreen() {
   return (
     <CityList
       cities={filteredCities}
+      hasFiltersApplied={hasFiltersApplied(selectedFilters)}
       contentContainerStyle={{ paddingHorizontal: 16, paddingBottom: 32 }}
       scrollIndicatorInsets={{ top: 16 }}
     />
