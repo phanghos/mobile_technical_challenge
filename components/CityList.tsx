@@ -2,10 +2,11 @@ import type { City } from '@/domain/city/entities/City';
 import { useNavigation } from 'expo-router';
 import React, { useMemo, useState } from 'react';
 import { FlatList, FlatListProps, ListRenderItem, View } from 'react-native';
-import { Button, Searchbar } from 'react-native-paper';
+import { Searchbar } from 'react-native-paper';
 import Animated, { SlideInLeft } from 'react-native-reanimated';
 import { CityView } from './CityView';
 import { EmptyList } from './EmptyList';
+import { FilterButtonContainer } from './FilterButtonContainer';
 
 const ANIMATION_DELAY = 50;
 
@@ -77,23 +78,7 @@ export const CityList = ({ cities, ...flatListProps }: CityListProps) => {
         showsVerticalScrollIndicator={false}
         {...flatListProps}
       />
-      {
-        <View
-          style={{
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
-          <Button
-            mode="contained"
-            onPress={navigateToFilter}
-            style={{
-              position: 'absolute',
-              bottom: 36,
-            }}>
-            Filter
-          </Button>
-        </View>
-      }
+      <FilterButtonContainer />
     </View>
   );
 };
