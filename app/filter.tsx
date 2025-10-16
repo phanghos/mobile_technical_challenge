@@ -4,14 +4,14 @@ import { setSelectedFilters } from '@/domain/filter/store/actions/setSelectedFil
 import { useFilterStore } from '@/domain/filter/store/useFilterStore';
 import { applyFiltersToCities } from '@/domain/filter/utils/applyFiltersToCities';
 import { useNavigation } from 'expo-router';
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Button, Checkbox } from 'react-native-paper';
 
 export default function Filter() {
   const cities = useCityStore(s => s.cities);
   const filtersFromStore = useFilterStore(s => s.selectedFilters);
-  const { goBack } = useNavigation();
+  const { goBack, setOptions } = useNavigation();
   const languages = useMemo(() => {
     const uniqueLanguages = new Set<string>([]);
 
@@ -29,6 +29,25 @@ export default function Filter() {
     });
 
     return uniqueCurrencies;
+  }, []);
+
+  useEffect(() => {
+    setOptions({
+      headerRight: () => (
+        <Button
+          mode="text"
+          onPress={() => {
+            const initialState: FilterModel = {
+              language: [],
+              currency: [],
+            };
+            setSelectedFilters(initialState);
+            setFilters(initialState);
+          }}>
+          Reset filters
+        </Button>
+      ),
+    });
   }, []);
 
   const [filters, setFilters] = useState<FilterModel>(filtersFromStore);
