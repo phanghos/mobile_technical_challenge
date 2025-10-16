@@ -1,6 +1,6 @@
 import type { City } from '@/domain/city/entities/City';
 import { useNavigation } from 'expo-router';
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { FlatList, FlatListProps, ListRenderItem, View } from 'react-native';
 import { Searchbar } from 'react-native-paper';
 import Animated, { SlideInLeft } from 'react-native-reanimated';
@@ -68,6 +68,12 @@ export const CitiesList = ({
 
   const navigateToCityDetails = (city: City) =>
     navigate('city-details', { city });
+
+  useEffect(() => {
+    if (hasFiltersApplied) {
+      setSearchQuery('');
+    }
+  }, [hasFiltersApplied]);
 
   return (
     <View style={{ flex: 1 }}>
