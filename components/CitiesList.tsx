@@ -48,7 +48,7 @@ type CityListProps = {
   hasFiltersApplied: boolean;
 } & Omit<FlatListProps<City>, ExcludedFlatListProps>;
 
-export const CityList = ({
+export const CitiesList = ({
   cities,
   hasFiltersApplied,
   ...flatListProps

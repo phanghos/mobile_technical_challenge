@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import { CityList } from '@/components/CityList';
+import { CitiesList } from '@/components/CitiesList';
 import { ErrorView } from '@/components/ErrorView';
 import { FullScreenSpinner } from '@/components/FullScreenSpinner';
 import { useCityStore } from '@/domain/city/store/useCityStore';
@@ -34,7 +34,7 @@ export default function HomeScreen() {
   }
 
   return (
-    <CityList
+    <CitiesList
       cities={filteredCities}
       hasFiltersApplied={hasFiltersApplied(selectedFilters)}
       contentContainerStyle={{ paddingHorizontal: 16, paddingBottom: 32 }}
