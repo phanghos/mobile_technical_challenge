@@ -83,7 +83,7 @@ export const CityList = ({
         keyExtractor={keyExtractor}
         ItemSeparatorComponent={ItemSeparator}
         ListEmptyComponent={
-          hasFiltersApplied ? NoFilterResultsComponent : EmptyList
+          hasFiltersApplied ? NoFilterResultsComponent : EmptyListComponent
         }
         // to avoid tapping twice on the card when the keyboard is open
         keyboardShouldPersistTaps="always"
