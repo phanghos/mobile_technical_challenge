@@ -2,12 +2,13 @@ import type { PlaceRaw } from '@/data/dtos/PlaceRaw';
 import { GET_PLACES } from '@/data/graphql/queries';
 import { setPlaces } from '@/domain/place/store/actions/setPlaces';
 import { useFetch } from '@/hooks/useFetch';
+import { placesAdapter, PlacesAdapter } from '../adapters/placesAdapter';
 
-export const useFetchPlaces = () => {
+export const useFetchPlaces = (adaptPlaces: PlacesAdapter = placesAdapter) => {
   const { loading, error, refetch } = useFetch<{ allPlaces: PlaceRaw[] }>(
     GET_PLACES,
     data => {
-      setPlaces(data.allPlaces);
+      setPlaces(adaptPlaces(data.allPlaces));
     },
   );
 

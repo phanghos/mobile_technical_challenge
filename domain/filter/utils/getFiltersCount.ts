@@ -1,8 +1,4 @@
-import type { Filter } from '../entities/Filter';
-import type { FilterType } from '../entities/FilterType';
+type Filters = Record<string, unknown[]>;
 
-export const getFiltersCount = (filter: Filter): number =>
-  Object.keys(filter).reduce(
-    (acc, cur) => acc + filter[cur as FilterType].length,
-    0,
-  );
+export const getFiltersCount = (filters: Filters): number =>
+  Object.keys(filters).reduce((acc, cur) => acc + filters[cur].length, 0);

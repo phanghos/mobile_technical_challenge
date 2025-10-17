@@ -11,6 +11,7 @@ export const useCityStore = create<CityStoreState>()(
   persist<CityStoreState>(
     () => ({
       cities: [],
+      visibleCities: [],
     }),
     {
       name: 'city-store',

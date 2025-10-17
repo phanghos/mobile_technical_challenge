@@ -1,11 +1,9 @@
-import type { PlaceRaw } from '@/data/dtos/PlaceRaw';
-import { PlaceStore, usePlaceStore } from '@/domain/place/store/usePlaceStore';
-import { placeAdapter, PlaceAdapter } from '../../adapters/placeAdapter';
+import type { Place } from '../../entities/Place';
+import { PlaceStore, usePlaceStore } from '../usePlaceStore';
 
 export const setPlaces = (
-  places: PlaceRaw[],
-  adaptPlaces: PlaceAdapter = placeAdapter,
+  places: Place[],
   store: PlaceStore = usePlaceStore,
-) => {
-  store.setState({ places: adaptPlaces(places) });
+): void => {
+  store.setState({ places });
 };

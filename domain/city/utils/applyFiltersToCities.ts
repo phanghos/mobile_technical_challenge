@@ -1,10 +1,10 @@
 import type { City } from '@/domain/city/entities/City';
-import type { Filter } from '@/domain/filter/entities/Filter';
+import type { CityFilters } from '@/domain/city/entities/CityFilters';
 import { filterByCurrency } from './filterByCurrency';
 import { filterByLanguage } from './filterByLanguage';
 
 export const applyFiltersToCities = (
-  filters: Filter,
+  filters: CityFilters,
   cities: City[],
 ): City[] => {
   const atomicFilters = [

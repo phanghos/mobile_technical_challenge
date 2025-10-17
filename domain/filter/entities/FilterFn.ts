@@ -1,3 +1,3 @@
-import type { City } from '@/domain/city/entities/City';
-
-export type FilterFn<T> = (filters: T[]) => (city: City) => boolean;
+export type FilterFn<TFilter, TEntity> = (
+  filters: TFilter[],
+) => (city: TEntity) => boolean;
