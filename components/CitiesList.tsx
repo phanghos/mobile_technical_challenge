@@ -1,12 +1,12 @@
 import type { City } from '@/domain/city/entities/City';
 import { useNavigation } from 'expo-router';
-import React, { useEffect, useMemo, useState } from 'react';
+import React from 'react';
 import { FlatList, FlatListProps, ListRenderItem, View } from 'react-native';
-import { Searchbar } from 'react-native-paper';
 import Animated, { SlideInLeft } from 'react-native-reanimated';
+import { CityFilterButtonContainer } from './CityFilterButtonContainer';
 import { CityView } from './CityView';
 import { EmptyList } from './EmptyList';
-import { FilterButtonContainer } from './FilterButtonContainer';
+import { SearchBarContainer } from './SearchBarContainer';
 
 const ANIMATION_DELAY = 50;
 
@@ -30,13 +30,6 @@ const EmptyListComponent = () => (
   />
 );
 
-const NoFilterResultsComponent = () => (
-  <EmptyList
-    title="Oops!"
-    description="Looks like there are no results after applying the selected filters"
-  />
-);
-
 type ExcludedFlatListProps =
   | 'data'
   | 'renderItem'
@@ -45,58 +38,35 @@ type ExcludedFlatListProps =
 
 type CityListProps = {
   cities: City[];
-  hasFiltersApplied: boolean;
+  onSearch: (searchQuery: string) => void;
 } & Omit<FlatListProps<City>, ExcludedFlatListProps>;
 
 export const CitiesList = ({
   cities,
-  hasFiltersApplied,
+  onSearch,
   ...flatListProps
 }: CityListProps) => {
   const { navigate } = useNavigation();
-  const [searchQuery, setSearchQuery] = useState('');
-  const filteredCities = useMemo(() => {
-    if (!searchQuery) {
-      return cities;
-    }
-    return cities.filter(it =>
-      it.name.toLowerCase().includes(searchQuery.toLowerCase()),
-    );
-  }, [cities, searchQuery]);
-
-  const onChangeText = (text: string) => setSearchQuery(text.trimStart());
 
   const navigateToCityDetails = (city: City) =>
     navigate('city-details', { city });
 
-  useEffect(() => {
-    if (hasFiltersApplied) {
-      setSearchQuery('');
-    }
-  }, [hasFiltersApplied]);
-
   return (
     <View style={{ flex: 1 }}>
-      <Searchbar
-        placeholder="Search cities..."
-        onChangeText={onChangeText}
-        value={searchQuery}
-        style={{ margin: 16, backgroundColor: '#fff' }}
-      />
+      <SearchBarContainer placeholder="Search cities..." onSearch={onSearch} />
+
       <FlatList
-        data={filteredCities}
+        data={cities}
         renderItem={renderItem(navigateToCityDetails)}
         keyExtractor={keyExtractor}
         ItemSeparatorComponent={ItemSeparator}
-        ListEmptyComponent={
-          hasFiltersApplied ? NoFilterResultsComponent : EmptyListComponent
-        }
+        ListEmptyComponent={EmptyListComponent}
         // to avoid tapping twice on the card when the keyboard is open
         keyboardShouldPersistTaps="always"
         showsVerticalScrollIndicator={false}
         {...flatListProps}
       />
-      <FilterButtonContainer />
+      <CityFilterButtonContainer />
     </View>
   );
 };
