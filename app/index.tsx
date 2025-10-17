@@ -1,23 +1,26 @@
-import React, { useMemo } from 'react';
+import React, { useState } from 'react';
 
 import { CitiesList } from '@/components/CitiesList';
 import { ErrorView } from '@/components/ErrorView';
 import { FullScreenSpinner } from '@/components/FullScreenSpinner';
-import { useCityStore } from '@/domain/city/store/useCityStore';
+import { useCityStore } from '@/domain/city/stores/useCityStore';
 import { useFetchCities } from '@/domain/city/useCases/useFetchCities';
-import { useFilterStore } from '@/domain/filter/store/useFilterStore';
-import { applyFiltersToCities } from '@/domain/filter/utils/applyFiltersToCities';
-import { hasFiltersApplied } from '@/domain/filter/utils/hasFiltersApplied';
+import { useVisibleCities } from '@/domain/city/useCases/useVisibleCities';
 
 export default function HomeScreen() {
   const { loading, error, refetch } = useFetchCities();
   const cities = useCityStore(s => s.cities);
-  const selectedFilters = useFilterStore(s => s.selectedFilters);
-  const filteredCities = useMemo(() => {
-    return applyFiltersToCities(selectedFilters, cities);
-  }, [cities, selectedFilters]);
+  const [searchQuery, setSearchQuery] = useState('');
+  // const visibleCities = useMemo(
+  //   () => searchCities(searchQuery, cities),
+  //   [searchQuery, cities],
+  // );
+  const visibleCities = useVisibleCities(searchQuery);
+  const hasData = !!cities.length;
+  const shouldShowError = !!error && !hasData;
+  const shouldShowLoading = loading && !hasData;
 
-  if (error && !cities.length) {
+  if (shouldShowError) {
     return (
       <ErrorView
         title="Oops!"
@@ -29,14 +32,14 @@ export default function HomeScreen() {
     );
   }
 
-  if (loading) {
+  if (shouldShowLoading) {
     return <FullScreenSpinner />;
   }
 
   return (
     <CitiesList
-      cities={filteredCities}
-      hasFiltersApplied={hasFiltersApplied(selectedFilters)}
+      cities={visibleCities}
+      onSearch={setSearchQuery}
       contentContainerStyle={{ paddingHorizontal: 16, paddingBottom: 32 }}
       scrollIndicatorInsets={{ top: 16 }}
     />

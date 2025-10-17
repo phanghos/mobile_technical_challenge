@@ -3,16 +3,22 @@ import type { PlacesMap } from '@/domain/place/entities/PlacesMap';
 import type { PlaceType } from '@/domain/place/entities/PlaceType';
 
 const getPlacesForCityByType = (cityKey: string, places: Place[]): PlacesMap =>
-  places.reduce((acc, cur) => {
-    if (cur.key !== cityKey) {
-      return acc;
-    }
+  places.reduce<PlacesMap>(
+    (acc, cur) => {
+      if (cur.key !== cityKey) {
+        return acc;
+      }
 
-    return {
-      ...acc,
-      [cur.type]: [...(acc[cur.type] || []), cur],
-    };
-  }, {} as PlacesMap);
+      return {
+        ...acc,
+        [cur.type]: [...(acc[cur.type] || []), cur],
+      };
+    },
+    {
+      restaurant: [],
+      monument: [],
+    },
+  );
 
 const getAllPlaces = (placesMap: PlacesMap): Place[] =>
   Object.keys(placesMap).reduce(

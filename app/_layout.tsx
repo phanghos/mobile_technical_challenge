@@ -53,9 +53,9 @@ export default function RootLayout() {
               }}
             />
             <Stack.Screen
-              name="filter"
+              name="city-filters"
               options={{
-                headerTitle: 'Filter',
+                headerTitle: 'City Filters',
                 presentation: 'modal',
               }}
             />
