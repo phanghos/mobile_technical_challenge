@@ -1,24 +1,19 @@
 import type { City } from '@/domain/city/entities/City';
-import type { Filter } from '@/domain/filter/entities/Filter';
-import { applyFiltersToCities } from '@/domain/filter/utils/applyFiltersToCities';
-import { filterByCurrency } from '@/domain/filter/utils/filterByCurrency';
-import { filterByLanguage } from '@/domain/filter/utils/filterByLanguage';
+import type { CityFilters } from '@/domain/city/entities/CityFilters';
+import { applyFiltersToCities } from '@/domain/city/utils/applyFiltersToCities';
+import { filterByCurrency } from '@/domain/city/utils/filterByCurrency';
+import { filterByLanguage } from '@/domain/city/utils/filterByLanguage';
 import { Builder } from 'builder-pattern';
 
-jest.mock('@/domain/filter/utils/filterByLanguage', () => ({
+jest.mock('@/domain/city/utils/filterByLanguage', () => ({
   filterByLanguage: jest.fn(),
 }));
 
-jest.mock('@/domain/filter/utils/filterByCurrency', () => ({
+jest.mock('@/domain/city/utils/filterByCurrency', () => ({
   filterByCurrency: jest.fn(),
 }));
 
 describe('applyFiltersToCities', () => {
-  beforeEach(() => {
-    mockedFilterByLanguage.mockReset();
-    mockedFilterByCurrency.mockReset();
-  });
-
   describe('when there are no filters applied', () => {
     it('calls the filtering functions and returns the full list of cities', () => {
       // Given
@@ -66,11 +61,11 @@ describe('applyFiltersToCities', () => {
 const mockedFilterByLanguage = jest.mocked(filterByLanguage);
 const mockedFilterByCurrency = jest.mocked(filterByCurrency);
 
-const noFiltersApplied: Filter = {
+const noFiltersApplied: CityFilters = {
   language: [],
   currency: [],
 };
-const someFiltersApplied: Filter = {
+const someFiltersApplied: CityFilters = {
   language: ['German', 'Portuguese', 'Japanese'],
   currency: ['Eur'],
 };

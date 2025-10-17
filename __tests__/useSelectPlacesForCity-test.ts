@@ -1,40 +1,53 @@
 import { Place } from '@/domain/place/entities/Place';
+import { PlacesMap } from '@/domain/place/entities/PlacesMap';
 import { useSelectPlacesForCity } from '@/domain/place/store/selectors/useSelectPlacesForCity';
 import { usePlaceStore } from '@/domain/place/store/usePlaceStore';
-import { PlacesUtils } from '@/shared/utils/places';
 import { renderHook } from '@testing-library/react-native';
 import { Builder } from 'builder-pattern';
 
-jest.mock('@/shared/utils/places', () => ({
-  PlacesUtils: {
-    getPlacesForCityByType: jest.fn().mockReturnValue({}),
-  },
-}));
-
-const mockedGetPlacesForCityByType = jest.mocked(
-  PlacesUtils.getPlacesForCityByType,
-);
-
 describe('useSelectPlacesForCity', () => {
-  beforeEach(() => {
-    usePlaceStore.setState({
-      places: [restaurant, monument],
+  describe('given an existing city key', () => {
+    it('returns the places for an existing city key as a dictionary', () => {
+      // Given
+      usePlaceStore.setState({
+        places: [restaurant, monument],
+      });
+      const expected: PlacesMap = {
+        restaurant: [restaurant],
+        monument: [monument],
+      };
+
+      // When
+      const { result } = renderHook(() => useSelectPlacesForCity(cityKey));
+
+      // Then
+      expect(result.current).toStrictEqual(expected);
     });
   });
 
-  it('calls getPlacesForCityByType internally', () => {
-    // When
-    const { result } = renderHook(() => useSelectPlacesForCity(cityKey));
+  describe('given a non-existing city key', () => {
+    it('returns an empty dictionary', () => {
+      // Given
+      usePlaceStore.setState({
+        places: [restaurant, monument],
+      });
+      const expected: PlacesMap = {
+        restaurant: [],
+        monument: [],
+      };
 
-    // Then
-    expect(result.current).toStrictEqual({});
-    expect(mockedGetPlacesForCityByType).toHaveBeenCalledWith(cityKey, [
-      restaurant,
-      monument,
-    ]);
+      // When
+      const { result } = renderHook(() =>
+        useSelectPlacesForCity(nonExistingCityKey),
+      );
+
+      // Then
+      expect(result.current).toStrictEqual(expected);
+    });
   });
 });
 
 const cityKey = 'barcelona';
-const restaurant = Builder<Place>().type('restaurant').build();
-const monument = Builder<Place>().type('monument').build();
+const nonExistingCityKey = 'invalid_key';
+const restaurant = Builder<Place>().key(cityKey).type('restaurant').build();
+const monument = Builder<Place>().key(cityKey).type('monument').build();

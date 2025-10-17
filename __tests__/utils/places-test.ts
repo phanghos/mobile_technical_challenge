@@ -25,6 +25,10 @@ describe('Places Utils', () => {
       it('returns an empty map', () => {
         // Given
         const places: Place[] = [restaurant, monument];
+        const expected: PlacesMap = {
+          restaurant: [],
+          monument: [],
+        };
 
         // When
         const result = PlacesUtils.getPlacesForCityByType(
@@ -33,7 +37,7 @@ describe('Places Utils', () => {
         );
 
         // Then
-        expect(result).toStrictEqual({});
+        expect(result).toStrictEqual(expected);
       });
     });
   });

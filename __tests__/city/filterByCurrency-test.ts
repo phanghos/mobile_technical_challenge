@@ -1,13 +1,13 @@
 import { City } from '@/domain/city/entities/City';
-import { Filter } from '@/domain/filter/entities/Filter';
-import { filterByLanguage } from '@/domain/filter/utils/filterByLanguage';
+import { CityFilters } from '@/domain/city/entities/CityFilters';
+import { filterByCurrency } from '@/domain/city/utils/filterByCurrency';
 import { Builder } from 'builder-pattern';
 
-describe('filterByLanguage', () => {
+describe('filterByCurrency', () => {
   describe('when there are no filters applied', () => {
     it('returns true', () => {
       // When
-      const result = filterByLanguage(noFiltersApplied.language)(berlinCity);
+      const result = filterByCurrency(noFiltersApplied.currency)(berlinCity);
 
       // Then
       expect(result).toBe(true);
@@ -18,7 +18,7 @@ describe('filterByLanguage', () => {
     describe('and the city matches the filter', () => {
       it('it returns true', () => {
         // When
-        const result = filterByLanguage(germanLanguageFilterApplied.language)(
+        const result = filterByCurrency(euroCurrencyFilterApplied.currency)(
           berlinCity,
         );
 
@@ -30,7 +30,7 @@ describe('filterByLanguage', () => {
     describe('and the city does not match the filter', () => {
       it('it returns false', () => {
         // When
-        const result = filterByLanguage(germanLanguageFilterApplied.language)(
+        const result = filterByCurrency(euroCurrencyFilterApplied.currency)(
           tokyoCity,
         );
 
@@ -41,13 +41,13 @@ describe('filterByLanguage', () => {
   });
 });
 
-const noFiltersApplied: Filter = {
+const noFiltersApplied: CityFilters = {
   language: [],
   currency: [],
 };
-const germanLanguageFilterApplied: Filter = {
-  language: ['German'],
-  currency: [],
+const euroCurrencyFilterApplied: CityFilters = {
+  language: [],
+  currency: ['Eur'],
 };
 const berlinCity = Builder<City>()
   .fullLanguage('German')

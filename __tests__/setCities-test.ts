@@ -1,31 +1,22 @@
-import { CityRaw } from '@/data/dtos/CityRaw';
 import { City } from '@/domain/city/entities/City';
-import { setCities } from '@/domain/city/store/actions/setCities';
-import { useCityStore } from '@/domain/city/store/useCityStore';
+import { setCities } from '@/domain/city/stores/actions/setCities';
+import { useCityStore } from '@/domain/city/stores/useCityStore';
 import { Builder } from 'builder-pattern';
 
 describe('setCities', () => {
-  const mockAdapter = jest.fn();
-
-  beforeEach(() => {
-    mockAdapter.mockReset();
-    mockAdapter.mockReturnValue([city]);
-  });
-
   it('initial state', () => {
     expect(useCityStore.getState().cities).toHaveLength(0);
   });
 
-  it('calls adapter and sets cities on store', () => {
+  it('sets cities on store', () => {
     // When
-    setCities([cityRaw], mockAdapter);
+    setCities([city, anotherCity]);
 
     // Then
-    expect(useCityStore.getState().cities).toHaveLength(1);
-    expect(useCityStore.getState().cities).toStrictEqual([city]);
-    expect(mockAdapter).toHaveBeenCalledWith([cityRaw]);
+    expect(useCityStore.getState().cities).toHaveLength(2);
+    expect(useCityStore.getState().cities).toStrictEqual([city, anotherCity]);
   });
 });
 
-const cityRaw = Builder<CityRaw>().build();
 const city = Builder<City>().build();
+const anotherCity = Builder<City>().build();

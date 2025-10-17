@@ -1,4 +1,4 @@
-import { Filter } from '@/domain/filter/entities/Filter';
+import { CityFilters } from '@/domain/city/entities/CityFilters';
 import { getFiltersCount } from '@/domain/filter/utils/getFiltersCount';
 
 describe('getFiltersCount', () => {
@@ -23,11 +23,11 @@ describe('getFiltersCount', () => {
   });
 });
 
-const noFiltersApplied: Filter = {
+const noFiltersApplied: CityFilters = {
   language: [],
   currency: [],
 };
-const someFiltersApplied: Filter = {
+const someFiltersApplied: CityFilters = {
   language: ['German', 'Portuguese', 'Japanese'],
   currency: ['Eur'],
 };
