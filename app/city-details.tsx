@@ -41,7 +41,7 @@ export default function CityDetailsScreen() {
   } = useRoute<RouteProp<ScreenRouteProps, 'city-details'>>();
   const { loading, error, refetch } = useFetchPlaces();
   const placesMap = useSelectPlacesForCity(city.key);
-  const hasData = !!!Object.keys(placesMap).length;
+  const hasData = !!Object.keys(placesMap).length;
 
   useEffect(() => {
     setOptions({
