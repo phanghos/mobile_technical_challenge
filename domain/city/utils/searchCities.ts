@@ -1,4 +1,4 @@
-import { createSearchFunction } from '@/domain/search/utils/createSearchFunction';
+import { createSearchFunction } from '@/shared/createSearchFunction';
 import type { City } from '../entities/City';
 
 export const searchCities = createSearchFunction<City>((searchQuery, items) => {

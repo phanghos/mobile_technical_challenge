@@ -1,4 +1,4 @@
-import { createSearchFunction } from '@/domain/search/utils/createSearchFunction';
+import { createSearchFunction } from '@/shared/createSearchFunction';
 
 describe('createSearchFunction', () => {
   it('returns a function that calls the passed callback when run', () => {
