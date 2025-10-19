@@ -1,14 +1,18 @@
 import type { City } from '../../entities/City';
-import { addFavoriteCity } from './addFavoriteCity';
+import { AddFavoriteCity, addFavoriteCity } from './addFavoriteCity';
 import { isFavoriteCity } from './isFavoriteCity';
-import { removeFavouriteCity } from './removeFavouriteCity';
+import { RemoveFavoriteCity, removeFavouriteCity } from './removeFavouriteCity';
 
-export const toggleFavouriteCity = (city: City): void => {
+export const toggleFavouriteCity = (
+  city: City,
+  addCity: AddFavoriteCity = addFavoriteCity,
+  removeCity: RemoveFavoriteCity = removeFavouriteCity,
+): void => {
   const isFavourite = isFavoriteCity(city.id);
 
   if (isFavourite) {
-    removeFavouriteCity(city.id);
+    removeCity(city.id);
   } else {
-    addFavoriteCity(city);
+    addCity(city);
   }
 };

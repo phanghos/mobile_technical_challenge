@@ -11,3 +11,5 @@ export const addFavoriteCity = (
   const { cities } = store.getState();
   store.setState({ cities: { ...cities, [Number(city.id)]: city } });
 };
+
+export type AddFavoriteCity = typeof addFavoriteCity;
