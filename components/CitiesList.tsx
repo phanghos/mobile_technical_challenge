@@ -11,11 +11,20 @@ import { SearchBarContainer } from './SearchBarContainer';
 const ANIMATION_DELAY = 50;
 
 const renderItem =
-  (onPress: (city: City) => void): ListRenderItem<City> =>
+  (
+    onPress: (city: City) => void,
+    onFavoritePres: (city: City) => void,
+    isFavoriteCityFn: (cityId: number) => boolean,
+  ): ListRenderItem<City> =>
   ({ item, index }) =>
     (
       <Animated.View entering={SlideInLeft.delay(index * ANIMATION_DELAY)}>
-        <CityView city={item} onPress={onPress} />
+        <CityView
+          city={item}
+          isFavourite={isFavoriteCityFn(item.id)}
+          onPress={onPress}
+          onFavouritePress={onFavoritePres}
+        />
       </Animated.View>
     );
 
@@ -38,12 +47,16 @@ type ExcludedFlatListProps =
 
 type CityListProps = {
   cities: City[];
+  isFavoriteCityFn: (cityId: number) => boolean;
   onSearch: (searchQuery: string) => void;
+  onFavoritePress: (city: City) => void;
 } & Omit<FlatListProps<City>, ExcludedFlatListProps>;
 
 export const CitiesList = ({
   cities,
+  isFavoriteCityFn,
   onSearch,
+  onFavoritePress,
   ...flatListProps
 }: CityListProps) => {
   const { navigate } = useNavigation();
@@ -57,7 +70,11 @@ export const CitiesList = ({
 
       <FlatList
         data={cities}
-        renderItem={renderItem(navigateToCityDetails)}
+        renderItem={renderItem(
+          navigateToCityDetails,
+          onFavoritePress,
+          isFavoriteCityFn,
+        )}
         keyExtractor={keyExtractor}
         ItemSeparatorComponent={ItemSeparator}
         ListEmptyComponent={EmptyListComponent}
@@ -66,6 +83,7 @@ export const CitiesList = ({
         showsVerticalScrollIndicator={false}
         {...flatListProps}
       />
+
       <CityFilterButtonContainer />
     </View>
   );
