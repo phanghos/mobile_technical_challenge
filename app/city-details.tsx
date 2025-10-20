@@ -1,11 +1,12 @@
 import { ErrorView } from '@/components/ErrorView';
 import { FullScreenSpinner } from '@/components/FullScreenSpinner';
-import { PlacesList } from '@/components/PlacesList';
+import { PlacesList } from '@/components/place/PlacesList';
 import { City } from '@/domain/city/entities/City';
 import { useSelectPlacesForCity } from '@/domain/place/store/selectors/useSelectPlacesForCity';
 import { useFetchPlaces } from '@/domain/place/useCases/useFetchPlaces';
 import { PlacesUtils } from '@/domain/place/utils/places';
-import { RouteProp, useRoute } from '@react-navigation/native';
+import { RootStackParamList } from '@/infra/navigation/types';
+import { NavigationProp, RouteProp, useRoute } from '@react-navigation/native';
 import { useNavigation } from 'expo-router';
 import React, { PropsWithChildren, useEffect } from 'react';
 import { Dimensions, StyleSheet, Text, View } from 'react-native';
@@ -35,7 +36,8 @@ type ScreenRouteProps = {
 };
 
 export default function CityDetailsScreen() {
-  const { setOptions, navigate } = useNavigation();
+  const { setOptions, navigate } =
+    useNavigation<NavigationProp<RootStackParamList, 'places-map'>>();
   const {
     params: { city },
   } = useRoute<RouteProp<ScreenRouteProps, 'city-details'>>();

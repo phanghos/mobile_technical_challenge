@@ -8,6 +8,9 @@ import { SearchBarContainer } from '../SearchBarContainer';
 import { CityView } from './CityView';
 import { EmptyCitiesList } from './EmptyCitiesList';
 
+import { RootStackParamList } from '@/infra/navigation/types';
+import { NavigationProp } from '@react-navigation/native';
+
 const renderItem =
   (
     onPress: (city: City) => void,
@@ -48,7 +51,8 @@ export const CitiesList = ({
   onFavoritePress,
   ...flatListProps
 }: CityListProps) => {
-  const { navigate } = useNavigation();
+  const { navigate } =
+    useNavigation<NavigationProp<RootStackParamList, 'city-details'>>();
 
   const navigateToCityDetails = (city: City) =>
     navigate('city-details', { city });

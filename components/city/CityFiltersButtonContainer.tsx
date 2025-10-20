@@ -1,5 +1,7 @@
 import { useCityFilterStore } from '@/domain/city/stores/useCityFilterStore';
 import { useCityStore } from '@/domain/city/stores/useCityStore';
+import { RootStackParamList } from '@/infra/navigation/types';
+import { NavigationProp } from '@react-navigation/native';
 import { useNavigation } from 'expo-router';
 import React from 'react';
 import { FilterButton } from '../filter/FilterButton';
@@ -7,7 +9,8 @@ import { FilterButton } from '../filter/FilterButton';
 export const CityFiltersButtonContainer = () => {
   const filters = useCityFilterStore(s => s.selectedFilters);
   const cities = useCityStore(s => s.cities);
-  const { navigate } = useNavigation();
+  const { navigate } =
+    useNavigation<NavigationProp<RootStackParamList, 'cities-filters'>>();
 
   if (!cities.length) {
     return null;
