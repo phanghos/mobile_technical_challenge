@@ -24,6 +24,7 @@ export const SearchBarContainer = ({
       onChangeText={onChangeText}
       value={searchQuery}
       style={{ margin: 16, backgroundColor: '#fff' }}
+      testID="search-bar"
     />
   );
 };

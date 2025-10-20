@@ -2,7 +2,7 @@ import { useFavoriteCitiesFilterStore } from '@/domain/city/stores/useFavoriteCi
 import { useFavoriteCitiesStore } from '@/domain/city/stores/useFavoriteCitiesStore';
 import { useNavigation } from 'expo-router';
 import React from 'react';
-import { FilterButton } from './FilterButton';
+import { FilterButton } from '../filter/FilterButton';
 
 export const FavoriteCitiesFiltersButtonContainer = () => {
   const filters = useFavoriteCitiesFilterStore(s => s.selectedFilters);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { EmptyList } from './EmptyList';
+import { EmptyList } from '../EmptyList';
 
 export const EmptyCitiesList = () => (
   <EmptyList

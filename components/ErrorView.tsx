@@ -20,14 +20,19 @@ export const ErrorView = ({
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{title}</Text>
-      <Text style={styles.description}>{description}</Text>
+      <Text style={styles.title} testID="error-title">
+        {title}
+      </Text>
+      <Text style={styles.description} testID="error-description">
+        {description}
+      </Text>
       {shouldRenderButton && (
         <Button
           mode="outlined"
           onPress={onPress}
           style={{ marginTop: 16 }}
-          disabled={disabled}>
+          disabled={disabled}
+          testID="error-cta">
           {ctaText}
         </Button>
       )}
