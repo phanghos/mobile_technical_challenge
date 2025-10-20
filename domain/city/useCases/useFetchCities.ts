@@ -1,7 +1,7 @@
+import { useFetch } from '@/core/hooks/useFetch';
 import type { CityRaw } from '@/data/dtos/CityRaw';
 import { GET_CITIES } from '@/data/graphql/queries';
 import { setCities } from '@/domain/city/stores/actions/setCities';
-import { useFetch } from '@/hooks/useFetch';
 import { citiesAdapter, CitiesAdapter } from '../adapters/citiesAdapter';
 
 export const useFetchCities = (adaptCities: CitiesAdapter = citiesAdapter) => {

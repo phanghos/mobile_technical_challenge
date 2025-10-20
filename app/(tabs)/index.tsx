@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import { CitiesList } from '@/components/CitiesList';
+import { CityFiltersButtonContainer } from '@/components/CityFiltersButtonContainer';
 import { ErrorView } from '@/components/ErrorView';
 import { FullScreenSpinner } from '@/components/FullScreenSpinner';
 import { isFavoriteCity } from '@/domain/city/stores/actions/isFavoriteCity';
@@ -12,11 +13,11 @@ import { useVisibleCities } from '@/domain/city/useCases/useVisibleCities';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function HomeScreen() {
-  const { loading, error, refetch } = useFetchCities();
-  const cities = useCityStore(s => s.cities);
   const [searchQuery, setSearchQuery] = useState('');
-  const visibleCities = useVisibleCities(searchQuery);
+  const cities = useCityStore(s => s.cities);
   const favorites = useFavoriteCitiesStore(s => s.cities);
+  const visibleCities = useVisibleCities(searchQuery);
+  const { loading, error, refetch } = useFetchCities();
   const hasData = !!cities.length;
   const shouldShowError = !!error && !hasData;
   const shouldShowLoading = loading && !hasData;
@@ -48,6 +49,7 @@ export default function HomeScreen() {
         scrollIndicatorInsets={{ top: 16 }}
         extraData={favorites}
       />
+      <CityFiltersButtonContainer />
     </SafeAreaView>
   );
 }

@@ -1,15 +1,6 @@
-import type { CityFilters } from '@/domain/city/entities/CityFilters';
-import { create } from 'zustand';
+import { createFilterStore } from '@/core/store/createFilterStore';
+import { CityFilters } from '../entities/CityFilters';
 
-type CityFilterStoreState = {
-  selectedFilters: CityFilters;
-};
-
-export const useCityFilterStore = create<CityFilterStoreState>(() => ({
-  selectedFilters: {
-    language: [],
-    currency: [],
-  },
-}));
+export const useCityFilterStore = createFilterStore<CityFilters>();
 
 export type CityFilterStore = typeof useCityFilterStore;

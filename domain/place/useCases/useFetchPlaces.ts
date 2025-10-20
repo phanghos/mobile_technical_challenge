@@ -1,7 +1,7 @@
+import { useFetch } from '@/core/hooks/useFetch';
 import type { PlaceRaw } from '@/data/dtos/PlaceRaw';
 import { GET_PLACES } from '@/data/graphql/queries';
 import { setPlaces } from '@/domain/place/store/actions/setPlaces';
-import { useFetch } from '@/hooks/useFetch';
 import { placesAdapter, PlacesAdapter } from '../adapters/placesAdapter';
 
 export const useFetchPlaces = (adaptPlaces: PlacesAdapter = placesAdapter) => {

@@ -1,5 +1,5 @@
 import { usePlaceStore } from '@/domain/place/store/usePlaceStore';
-import { PlacesUtils } from '@/shared/utils/places';
+import { PlacesUtils } from '@/domain/place/utils/places';
 import { useMemo } from 'react';
 
 export const useSelectPlacesForCity = (cityKey: string) => {

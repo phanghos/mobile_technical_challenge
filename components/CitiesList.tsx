@@ -1,14 +1,12 @@
 import type { City } from '@/domain/city/entities/City';
 import { useNavigation } from 'expo-router';
 import React from 'react';
-import { FlatList, FlatListProps, ListRenderItem, View } from 'react-native';
-import Animated, { SlideInLeft } from 'react-native-reanimated';
-import { CityFilterButtonContainer } from './CityFilterButtonContainer';
+import { ListRenderItem, View } from 'react-native';
+import Animated, { LinearTransition } from 'react-native-reanimated';
+import { ReanimatedFlatList } from 'react-native-reanimated/lib/typescript/component/FlatList';
 import { CityView } from './CityView';
-import { EmptyList } from './EmptyList';
+import { EmptyCitiesList } from './EmptyCitiesList';
 import { SearchBarContainer } from './SearchBarContainer';
-
-const ANIMATION_DELAY = 50;
 
 const renderItem =
   (
@@ -16,28 +14,19 @@ const renderItem =
     onFavoritePres: (city: City) => void,
     isFavoriteCityFn: (cityId: number) => boolean,
   ): ListRenderItem<City> =>
-  ({ item, index }) =>
+  ({ item }) =>
     (
-      <Animated.View entering={SlideInLeft.delay(index * ANIMATION_DELAY)}>
-        <CityView
-          city={item}
-          isFavourite={isFavoriteCityFn(item.id)}
-          onPress={onPress}
-          onFavouritePress={onFavoritePres}
-        />
-      </Animated.View>
+      <CityView
+        city={item}
+        isFavourite={isFavoriteCityFn(item.id)}
+        onPress={onPress}
+        onFavoritePress={onFavoritePres}
+      />
     );
 
 const keyExtractor = (city: City) => `${city.key}`;
 
 const ItemSeparator = () => <View style={{ marginVertical: 8 }} />;
-
-const EmptyListComponent = () => (
-  <EmptyList
-    title="Oops!"
-    description="Looks like there are no cities matching your search"
-  />
-);
 
 type ExcludedFlatListProps =
   | 'data'
@@ -50,7 +39,7 @@ type CityListProps = {
   isFavoriteCityFn: (cityId: number) => boolean;
   onSearch: (searchQuery: string) => void;
   onFavoritePress: (city: City) => void;
-} & Omit<FlatListProps<City>, ExcludedFlatListProps>;
+} & Omit<ReanimatedFlatList<City>, ExcludedFlatListProps>;
 
 export const CitiesList = ({
   cities,
@@ -68,7 +57,7 @@ export const CitiesList = ({
     <View style={{ flex: 1 }}>
       <SearchBarContainer placeholder="Search cities..." onSearch={onSearch} />
 
-      <FlatList
+      <Animated.FlatList
         data={cities}
         renderItem={renderItem(
           navigateToCityDetails,
@@ -77,14 +66,13 @@ export const CitiesList = ({
         )}
         keyExtractor={keyExtractor}
         ItemSeparatorComponent={ItemSeparator}
-        ListEmptyComponent={EmptyListComponent}
+        ListEmptyComponent={EmptyCitiesList}
         // to avoid tapping twice on the card when the keyboard is open
         keyboardShouldPersistTaps="always"
         showsVerticalScrollIndicator={false}
+        itemLayoutAnimation={LinearTransition}
         {...flatListProps}
       />
-
-      <CityFilterButtonContainer />
     </View>
   );
 };

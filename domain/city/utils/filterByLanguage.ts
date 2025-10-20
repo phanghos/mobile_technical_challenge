@@ -1,4 +1,4 @@
-import type { FilterFn } from '@/domain/filter/entities/FilterFn';
+import type { FilterFn } from '@/core/types/FilterFn';
 import type { City } from '../entities/City';
 
 export const filterByLanguage: FilterFn<string, City> = languages => city => {

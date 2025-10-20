@@ -1,6 +1,6 @@
 import { Place } from '@/domain/place/entities/Place';
 import { PlacesMap } from '@/domain/place/entities/PlacesMap';
-import { PlacesUtils } from '@/shared/utils/places';
+import { PlacesUtils } from '@/domain/place/utils/places';
 import { Builder } from 'builder-pattern';
 
 describe('Places Utils', () => {

@@ -1,16 +1,22 @@
-import type { CityFilters as FilterModel } from '@/domain/city/entities/CityFilters';
-import { setSelectedFilters } from '@/domain/city/stores/actions/setSelectedFilters';
-import { useCityFilterStore } from '@/domain/city/stores/useCityFilterStore';
-import { useCityStore } from '@/domain/city/stores/useCityStore';
+import { City } from '@/domain/city/entities/City';
+import { CityFilters } from '@/domain/city/entities/CityFilters';
 import { applyFiltersToCities } from '@/domain/city/utils/applyFiltersToCities';
 import { useNavigation } from 'expo-router';
 import React, { useEffect, useMemo, useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Button, Checkbox } from 'react-native-paper';
 
-export default function CityFilters() {
-  const cities = useCityStore(s => s.cities);
-  const filtersFromStore = useCityFilterStore(s => s.selectedFilters);
+type FiltersProps = {
+  cities: City[];
+  filters: CityFilters;
+  onSelectFilters: (filters: CityFilters) => void;
+};
+
+export const Filters = ({
+  cities,
+  filters: filtersFromProps,
+  onSelectFilters,
+}: FiltersProps) => {
   const { goBack, setOptions } = useNavigation();
   const languages = useMemo(() => {
     const uniqueLanguages = new Set<string>([]);
@@ -37,12 +43,12 @@ export default function CityFilters() {
         <Button
           mode="text"
           onPress={() => {
-            const initialState: FilterModel = {
+            const initialState: CityFilters = {
               language: [],
               currency: [],
             };
             setFilters(initialState);
-            setSelectedFilters(initialState);
+            onSelectFilters(initialState);
           }}>
           Reset filters
         </Button>
@@ -50,7 +56,7 @@ export default function CityFilters() {
     });
   }, []);
 
-  const [filters, setFilters] = useState<FilterModel>(filtersFromStore);
+  const [filters, setFilters] = useState<CityFilters>(filtersFromProps);
   const filteredResultsCount = useMemo(
     () => applyFiltersToCities(filters, cities).length,
     [filters],
@@ -96,7 +102,7 @@ export default function CityFilters() {
       <Button
         mode="contained"
         onPress={() => {
-          setSelectedFilters(filters);
+          onSelectFilters(filters);
           goBack();
         }}
         style={{ margin: 32 }}
@@ -105,7 +111,7 @@ export default function CityFilters() {
       </Button>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {

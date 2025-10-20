@@ -1,6 +1,6 @@
 import type { PlacesMap } from '@/domain/place/entities/PlacesMap';
 import type { PlaceType } from '@/domain/place/entities/PlaceType';
-import { PlacesUtils } from '@/shared/utils/places';
+import { PlacesUtils } from '@/domain/place/utils/places';
 import React, { useState } from 'react';
 import { ScrollView, StyleSheet, Text } from 'react-native';
 import { SegmentedButtons } from 'react-native-paper';

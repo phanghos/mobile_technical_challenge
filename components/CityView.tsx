@@ -1,31 +1,41 @@
 import type { City } from '@/domain/city/entities/City';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
-import { Button } from 'react-native-paper';
+import { Pressable, Text, TouchableOpacity, View } from 'react-native';
 
 type CityViewProps = {
   city: City;
   isFavourite: boolean;
-  onFavouritePress: (city: City) => void;
+  onFavoritePress: (city: City) => void;
   onPress: (city: City) => void;
 };
 
 export const CityView = ({
   city,
   isFavourite,
-  onFavouritePress,
+  onFavoritePress,
   onPress,
 }: CityViewProps) => (
   <View style={{ backgroundColor: '#fff' }}>
     <TouchableOpacity
       onPress={() => onPress(city)}
       style={{ padding: 18, backgroundColor: '#fff', borderRadius: 8 }}>
-      <Text
-        style={{
-          fontSize: 16,
-          fontWeight: '700',
-          marginBottom: 8,
-        }}>{`${city.name}`}</Text>
+      <View style={{ flexDirection: 'row' }}>
+        <Text
+          style={{
+            flex: 1,
+            fontSize: 16,
+            fontWeight: '700',
+            marginBottom: 8,
+          }}>{`${city.name}`}</Text>
+        <Pressable onPress={() => onFavoritePress(city)} hitSlop={16}>
+          <MaterialIcons
+            name={isFavourite ? 'favorite' : 'favorite-outline'}
+            size={24}
+            color="red"
+          />
+        </Pressable>
+      </View>
       <Text
         style={{
           fontSize: 16,
@@ -38,11 +48,5 @@ export const CityView = ({
           fontWeight: 300,
         }}>{`💰 Currency: ${city.currency}`}</Text>
     </TouchableOpacity>
-    <Button
-      mode="text"
-      onPress={() => onFavouritePress(city)}
-      style={{ marginBottom: 8, marginHorizontal: 8 }}>
-      {isFavourite ? 'Favorite' : 'Add to favorites'}
-    </Button>
   </View>
 );

@@ -9,7 +9,7 @@ export default function TabsLayout() {
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: '#007AFF',
+        tabBarActiveTintColor: '#6200ee',
       }}>
       <Tabs.Screen
         name="index"
@@ -21,7 +21,7 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
-        name="favorites"
+        name="favorite-cities"
         options={{
           title: 'Favorites',
           tabBarIcon: ({ color, size }) => (

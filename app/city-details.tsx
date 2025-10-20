@@ -4,7 +4,7 @@ import { PlacesList } from '@/components/PlacesList';
 import { City } from '@/domain/city/entities/City';
 import { useSelectPlacesForCity } from '@/domain/place/store/selectors/useSelectPlacesForCity';
 import { useFetchPlaces } from '@/domain/place/useCases/useFetchPlaces';
-import { PlacesUtils } from '@/shared/utils/places';
+import { PlacesUtils } from '@/domain/place/utils/places';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { useNavigation } from 'expo-router';
 import React, { PropsWithChildren, useEffect } from 'react';
