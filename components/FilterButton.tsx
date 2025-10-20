@@ -1,10 +1,11 @@
+import { Filters } from '@/core/filters/Filters';
 import { getFiltersCount } from '@/domain/filter/utils/getFiltersCount';
 import React, { useMemo } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button } from 'react-native-paper';
 
 type FilterButtonProps = {
-  filters: Record<string, unknown[]>;
+  filters: Filters;
   onPress: () => void;
 };
 
