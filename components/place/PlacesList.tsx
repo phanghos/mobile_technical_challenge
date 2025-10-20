@@ -31,16 +31,18 @@ export const PlacesList = ({ places }: PlacesListProps) => {
             {
               value: 'restaurant',
               label: 'Restaurants',
+              testID: 'segmented-button-restaurant',
             },
             {
               value: 'monument',
               label: 'Monuments',
+              testID: 'segmented-button-monument',
             },
           ]}
         />
       )}
 
-      <ScrollView style={styles.listContainer}>
+      <ScrollView style={styles.listContainer} testID="places-list">
         {places[value]?.map(it => {
           return (
             <Text key={it.name} style={styles.place}>
