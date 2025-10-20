@@ -1,5 +1,6 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { createJSONStorage, persist } from 'zustand/middleware';
 import { City } from '../entities/City';
 
 type CityId = number;
@@ -15,6 +16,7 @@ export const useFavoriteCitiesStore = create<FavoriteCitiesStoreState>()(
     }),
     {
       name: 'favorite-cities-store',
+      storage: createJSONStorage(() => AsyncStorage),
     },
   ),
 );
