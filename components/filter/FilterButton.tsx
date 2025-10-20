@@ -20,7 +20,11 @@ export const FilterButton = ({ filters, onPress }: FilterButtonProps) => {
 
   return (
     <View style={styles.container}>
-      <Button mode="contained" onPress={onPress} style={styles.button}>
+      <Button
+        mode="contained"
+        onPress={onPress}
+        style={styles.button}
+        testID="filter-button">
         {ctaText}
       </Button>
     </View>

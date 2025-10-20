@@ -79,6 +79,9 @@ export const Filters = ({
                   : [...prevState.language, it],
               }));
             }}
+            testID={`filter-checkbox-language-${it}-${
+              filters.language.includes(it) ? 'checked' : 'unchecked'
+            }`}
           />
         ))}
         <Text style={styles.sectionTitle}>Currency</Text>
@@ -95,6 +98,9 @@ export const Filters = ({
                   : [...prevState.currency, it],
               }));
             }}
+            testID={`filter-checkbox-currency-${it}-${
+              filters.currency.includes(it) ? 'checked' : 'unchecked'
+            }`}
           />
         ))}
       </ScrollView>
@@ -106,7 +112,8 @@ export const Filters = ({
           goBack();
         }}
         style={{ margin: 32 }}
-        disabled={!filteredResultsCount}>
+        disabled={!filteredResultsCount}
+        testID="filters-cta">
         {`Show Results (${filteredResultsCount})`}
       </Button>
     </View>
