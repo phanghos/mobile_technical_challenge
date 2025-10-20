@@ -4,9 +4,9 @@ import React from 'react';
 import { ListRenderItem, View } from 'react-native';
 import Animated, { LinearTransition } from 'react-native-reanimated';
 import { ReanimatedFlatList } from 'react-native-reanimated/lib/typescript/component/FlatList';
+import { SearchBarContainer } from '../SearchBarContainer';
 import { CityView } from './CityView';
 import { EmptyCitiesList } from './EmptyCitiesList';
-import { SearchBarContainer } from './SearchBarContainer';
 
 const renderItem =
   (

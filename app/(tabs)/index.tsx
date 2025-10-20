@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { CitiesList } from '@/components/CitiesList';
+import { CitiesList } from '@/components/city/CitiesList';
 import { CityFiltersButtonContainer } from '@/components/CityFiltersButtonContainer';
 import { ErrorView } from '@/components/ErrorView';
 import { FullScreenSpinner } from '@/components/FullScreenSpinner';

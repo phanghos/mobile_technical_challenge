@@ -1,5 +1,5 @@
-import { CitiesList } from '@/components/CitiesList';
-import { EmptyFavoritesList } from '@/components/EmptyFavoritesList';
+import { CitiesList } from '@/components/city/CitiesList';
+import { EmptyFavoriteCitiesList } from '@/components/city/EmptyFavoriteCitiesList';
 import { FavoriteCitiesFiltersButtonContainer } from '@/components/FavoriteCitiesFiltersButtonContainer';
 import { isFavoriteCity } from '@/domain/city/stores/actions/isFavoriteCity';
 import { setSelectedFavoriteCitiesFilters } from '@/domain/city/stores/actions/setSelectedFavoriteCitiesFilters';
@@ -26,7 +26,7 @@ export default function FavoriteCities() {
   }, [areThereFavorites]);
 
   if (!areThereFavorites) {
-    return <EmptyFavoritesList />;
+    return <EmptyFavoriteCitiesList />;
   }
 
   return (

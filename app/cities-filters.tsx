@@ -1,4 +1,4 @@
-import { Filters } from '@/components/Filters';
+import { Filters } from '@/components/filter/Filters';
 import { setSelectedCitiesFilters } from '@/domain/city/stores/actions/setSelectedCitiesFilters';
 import { useCityFilterStore } from '@/domain/city/stores/useCityFilterStore';
 import { useCityStore } from '@/domain/city/stores/useCityStore';
