@@ -48,6 +48,13 @@ export default function RootLayout() {
                 presentation: 'modal',
               }}
             />
+            <Stack.Screen
+              name="favorite-cities-filters"
+              options={{
+                headerTitle: 'Filters',
+                presentation: 'modal',
+              }}
+            />
           </Stack>
           <StatusBar style="auto" />
         </PaperProvider>

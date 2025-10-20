@@ -6,10 +6,10 @@ import { FilterButton } from './FilterButton';
 
 export const FavoriteCitiesFiltersButtonContainer = () => {
   const filters = useFavoriteCitiesFilterStore(s => s.selectedFilters);
-  const cities = useFavoriteCitiesStore(s => Object.values(s.cities));
+  const cities = useFavoriteCitiesStore(s => s.cities);
   const { navigate } = useNavigation();
 
-  if (!cities.length) {
+  if (!Object.values(cities).length) {
     return null;
   }
 

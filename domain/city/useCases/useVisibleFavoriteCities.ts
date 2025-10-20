@@ -4,11 +4,11 @@ import { useFavoriteCitiesFilterStore } from '../stores/useFavoriteCitiesFilterS
 import { useFavoriteCitiesStore } from '../stores/useFavoriteCitiesStore';
 
 export const useVisibleFavoriteCities = (searchQuery: string) => {
-  const cities = useFavoriteCitiesStore(s => Object.values(s.cities));
+  const cities = useFavoriteCitiesStore(s => s.cities);
   const filters = useFavoriteCitiesFilterStore(s => s.selectedFilters);
 
   return useMemo(
-    () => getVisibleCities(searchQuery, filters, cities),
+    () => getVisibleCities(searchQuery, filters, Object.values(cities)),
     [searchQuery, filters, cities],
   );
 };

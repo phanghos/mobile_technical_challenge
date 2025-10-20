@@ -2,11 +2,12 @@ import { Filters } from '@/components/Filters';
 import { setSelectedFavoriteCitiesFilters } from '@/domain/city/stores/actions/setSelectedFavoriteCitiesFilters';
 import { useFavoriteCitiesFilterStore } from '@/domain/city/stores/useFavoriteCitiesFilterStore';
 import { useFavoriteCitiesStore } from '@/domain/city/stores/useFavoriteCitiesStore';
-import React from 'react';
+import React, { useMemo } from 'react';
 
 export default function FavoriteCitiesFilters() {
-  const cities = useFavoriteCitiesStore(s => Object.values(s.cities));
+  const citiesMap = useFavoriteCitiesStore(s => s.cities);
   const filtersFromStore = useFavoriteCitiesFilterStore(s => s.selectedFilters);
+  const cities = useMemo(() => Object.values(citiesMap), [citiesMap]);
 
   return (
     <Filters
