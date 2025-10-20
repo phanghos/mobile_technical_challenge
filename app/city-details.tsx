@@ -45,7 +45,7 @@ export default function CityDetailsScreen() {
 
   useEffect(() => {
     setOptions({
-      headerTitle: city.name,
+      headerTitle: 'Details',
     });
   }, []);
 

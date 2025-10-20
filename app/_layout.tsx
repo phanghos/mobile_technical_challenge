@@ -33,29 +33,18 @@ export default function RootLayout() {
     <ApolloProvider client={client}>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
         <PaperProvider>
-          <Stack>
+          <Stack screenOptions={{ headerShown: true }}>
             <Stack.Screen
-              name="index"
+              name="(tabs)"
               options={{
-                title: 'Cities',
-              }}
-            />
-            <Stack.Screen
-              name="city-details"
-              options={{
-                headerTitle: 'City Details',
-              }}
-            />
-            <Stack.Screen
-              name="places-map"
-              options={{
-                headerTitle: 'Map View',
+                headerShown: false,
+                headerTitle: 'Cities',
               }}
             />
             <Stack.Screen
               name="city-filters"
               options={{
-                headerTitle: 'City Filters',
+                headerTitle: 'Filters',
                 presentation: 'modal',
               }}
             />

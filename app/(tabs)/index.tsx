@@ -9,6 +9,7 @@ import { useCityStore } from '@/domain/city/stores/useCityStore';
 import { useFavoriteCitiesStore } from '@/domain/city/stores/useFavoriteCitiesStore';
 import { useFetchCities } from '@/domain/city/useCases/useFetchCities';
 import { useVisibleCities } from '@/domain/city/useCases/useVisibleCities';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function HomeScreen() {
   const { loading, error, refetch } = useFetchCities();
@@ -37,14 +38,16 @@ export default function HomeScreen() {
   }
 
   return (
-    <CitiesList
-      cities={visibleCities}
-      onSearch={setSearchQuery}
-      isFavoriteCityFn={isFavoriteCity}
-      onFavoritePress={toggleFavouriteCity}
-      contentContainerStyle={{ paddingHorizontal: 16, paddingBottom: 32 }}
-      scrollIndicatorInsets={{ top: 16 }}
-      extraData={favorites}
-    />
+    <SafeAreaView style={{ flex: 1 }}>
+      <CitiesList
+        cities={visibleCities}
+        onSearch={setSearchQuery}
+        isFavoriteCityFn={isFavoriteCity}
+        onFavoritePress={toggleFavouriteCity}
+        contentContainerStyle={{ paddingHorizontal: 16 }}
+        scrollIndicatorInsets={{ top: 16 }}
+        extraData={favorites}
+      />
+    </SafeAreaView>
   );
 }
