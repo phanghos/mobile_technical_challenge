@@ -25,6 +25,7 @@ const Cell = ({ title, value }: CellProps) => (
   </View>
 );
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 const Row = ({ children }: PropsWithChildren<{}>) => (
   <View style={styles.container}>{children}</View>
 );
@@ -49,7 +50,7 @@ export default function CityDetailsScreen() {
     setOptions({
       headerTitle: 'Details',
     });
-  }, []);
+  }, [setOptions]);
 
   const showMap = () => {
     navigate('places-map', {

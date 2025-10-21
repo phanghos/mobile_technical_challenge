@@ -24,7 +24,7 @@ export default function PlacesMapView() {
     setOptions({
       headerTitle: '',
     });
-  }, []);
+  }, [setOptions]);
 
   return (
     <View style={styles.container}>

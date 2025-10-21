@@ -16,7 +16,7 @@ export const SearchBarContainer = ({
 
   useEffect(() => {
     onSearch(searchQuery);
-  }, [searchQuery]);
+  }, [onSearch, searchQuery]);
 
   return (
     <Searchbar

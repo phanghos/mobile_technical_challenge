@@ -1,12 +1,12 @@
 import { CitiesList } from '@/components/city/CitiesList';
 import { EmptyFavoriteCitiesList } from '@/components/city/EmptyFavoriteCitiesList';
-import { FavoriteCitiesFiltersButtonContainer } from '@/components/FavoriteCitiesFiltersButtonContainer';
+import { FavoriteCitiesFiltersButtonContainer } from '@/components/city/FavoriteCitiesFiltersButtonContainer';
 import { isFavoriteCity } from '@/domain/city/stores/actions/isFavoriteCity';
 import { setSelectedFavoriteCitiesFilters } from '@/domain/city/stores/actions/setSelectedFavoriteCitiesFilters';
 import { toggleFavouriteCity } from '@/domain/city/stores/actions/toggleFavouriteCity';
 import { useFavoriteCitiesStore } from '@/domain/city/stores/useFavoriteCitiesStore';
 import { useVisibleFavoriteCities } from '@/domain/city/useCases/useVisibleFavoriteCities';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function FavoriteCities() {

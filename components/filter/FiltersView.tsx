@@ -26,7 +26,7 @@ export const FiltersView = ({
     });
 
     return uniqueLanguages;
-  }, []);
+  }, [cities]);
   const currencies = useMemo(() => {
     const uniqueCurrencies = new Set<string>([]);
 
@@ -35,7 +35,7 @@ export const FiltersView = ({
     });
 
     return uniqueCurrencies;
-  }, []);
+  }, [cities]);
 
   useEffect(() => {
     setOptions({
@@ -54,12 +54,12 @@ export const FiltersView = ({
         </Button>
       ),
     });
-  }, []);
+  }, [setOptions, onSelectFilters]);
 
   const [filters, setFilters] = useState<CityFilters>(filtersFromProps);
   const filteredResultsCount = useMemo(
     () => applyFiltersToCities(filters, cities).length,
-    [filters],
+    [filters, cities],
   );
 
   return (

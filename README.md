@@ -2,7 +2,7 @@
 
 A simple React Native app built with **Expo** that displays a list of cities and their details using a **GraphQL API**.
 
-## Get started
+## ⚡ Get started
 
 1. Install dependencies
 
@@ -27,6 +27,14 @@ A simple React Native app built with **Expo** that displays a list of cities and
    ```bash
    npm run start-with-server
    ```
+
+## 🧪 Testing
+
+You can run the test suite with:
+
+```bash
+npm run test
+```
 
 ## 🚀 Tech Stack
 
