@@ -45,6 +45,7 @@ export default function HomeScreen() {
         onSearch={setSearchQuery}
         isFavoriteCityFn={isFavoriteCity}
         onFavoritePress={toggleFavouriteCity}
+        // @ts-ignore
         contentContainerStyle={{ paddingHorizontal: 16 }}
         scrollIndicatorInsets={{ top: 16 }}
         extraData={favorites}

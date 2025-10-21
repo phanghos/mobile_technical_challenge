@@ -36,6 +36,7 @@ export default function FavoriteCities() {
         onSearch={setSearchQuery}
         isFavoriteCityFn={isFavoriteCity}
         onFavoritePress={toggleFavouriteCity}
+        // @ts-ignore
         contentContainerStyle={{ paddingHorizontal: 16 }}
         scrollIndicatorInsets={{ top: 16 }}
       />
