@@ -37,12 +37,10 @@ describe('Filters', () => {
   });
 
   it('navigates back after tapping on cta', () => {
-    console.log(mockedUseNavigation);
-
-    const navigateMock = jest.fn();
+    const goBackMock = jest.fn();
     mockedUseNavigation.mockReturnValue({
       setOptions: jest.fn(),
-      goBack: navigateMock,
+      goBack: goBackMock,
     });
 
     const { getByTestId } = render(
@@ -51,7 +49,7 @@ describe('Filters', () => {
 
     fireEvent.press(getByTestId('filters-cta'));
 
-    expect(navigateMock).toHaveBeenCalled();
+    expect(goBackMock).toHaveBeenCalled();
   });
 });
 

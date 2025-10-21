@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { CitiesList } from '@/components/city/CitiesList';
-import { CityFiltersButtonContainer } from '@/components/CityFiltersButtonContainer';
+import { CityFiltersButtonContainer } from '@/components/city/CityFiltersButtonContainer';
 import { ErrorView } from '@/components/ErrorView';
 import { FullScreenSpinner } from '@/components/FullScreenSpinner';
 import { isFavoriteCity } from '@/domain/city/stores/actions/isFavoriteCity';
