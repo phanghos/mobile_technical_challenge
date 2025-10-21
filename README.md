@@ -125,6 +125,12 @@ The app is structured around **features**, each representing a specific domain o
 
 ## ⚠️ Known Issues or Limitations
 
+### Map
+
+---
+
+The map will only show when using **Expo Go** as the API keys have not been set :D
+
 ### Filters
 
 ---
