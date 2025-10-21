@@ -43,6 +43,21 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "updates": {
+      "enabled": true,
+      "checkAutomatically": "ON_LOAD",
+      "url": "https://u.expo.dev/fe7bc993-7354-4db3-941e-ea47860b6f98"
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "fe7bc993-7354-4db3-941e-ea47860b6f98"
+      }
+    },
+    "owner": "taitasciore",
+    "runtimeVersion": {
+      "policy": "sdkVersion"
     }
   }
 }
