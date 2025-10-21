@@ -36,12 +36,22 @@ You can run the test suite with:
 npm run test
 ```
 
+## 🧪 Linting
+
+The project contains an **ESLint** config provided by Expo with their own defaults, allowing further customization of rules and other properties.
+
+You can run the built-in script with:
+
+```bash
+npm run lint
+```
+
 ## 🚀 Tech Stack
 
 - **Expo** — Bootstraps and runs the React Native application.
 - **TypeScript** — Provides static typing for safer, more maintainable code.
 - **Expo Router / React Navigation** — Manages screen routing and navigation.
-- **Zustand** - Handles state management with a simple API with great Typescript support. It also supports persistence through the persist middleware.
+- **Zustand** - Handles state management with a simple API with great Typescript support. It also supports persistence through the _persist_ middleware.
 - **Apollo Client** — Consumes the GraphQL API.
 - **json-graphql-server** — Serves the mock GraphQL API locally.
 - **Reanimated** — Enables performant animations and gesture-based interactions on the native thread.
@@ -56,13 +66,13 @@ npm run test
 
 The project follows the principles of **Hexagonal Architecture** with a feature-oriented or domain-driven structure for clarity and scalability:
 
-- **app/** - App screens with file-based routing. Expo treats all files inside _app_ as a separate screen / route.
+- **app/** - App screens and modals with file-based routing. Expo treats all files inside _app_ as a separate screen / route.
 - **components/** — Reusable UI components.
 - **core/** - Foundational layer with reusable patterns, factories, helpers and utilities, types and interfaces, all of which are domain or feature-agnostic.
 - **domain/** - Entities and core business objects, business logic and rules, use cases and orchestrators, adapters / mappers, stores for domain-specific state.
-- **data/** — DTOs, GraphQL queries, mutations, API client setup
+- **data/** — DTOs, GraphQL queries, mutations, API client setup.
 - **shared/** — Small helpers and pure utility functions used across domains which are not foundational to the app.
-- **\_\_tests\_\_** — Unit and integration tests using Jest and React Native Testing Library
+- **\_\_tests\_\_** — Unit and integration tests using Jest and React Native Testing Library.
 - **\_\_mocks\_\_** — Mocks for Jest
 
 ## 📱 Features
@@ -114,7 +124,21 @@ The app is structured around **features**, each representing a specific domain o
 
 ## ⚠️ Known Issues or Limitations
 
-- Even though **createFilterStore** creates a generic filter store for any domain looking to implement filtering functionality, there are some limitations in terms of reusability:
+### Filters
 
-1. The **Filters** type assumes that all filters are string-based. There could be boolean, numeric, or range filters in the future.
-2. The **FiltersView** component is still coupled with **CityFilters**. The idea would be to have a filtering mechanism flexible enough to handle different data types.
+---
+
+Even though **createFilterStore** creates a generic filter store for any domain looking to implement filtering functionality, there are some limitations in terms of reusability:
+
+- The **Filters** type assumes that all filters are string-based. There could be boolean, numeric, or range filters in the future.
+- The **FiltersView** component is still coupled with **CityFilters**. The idea would be to have a filtering mechanism flexible enough to handle different data types.
+
+### Design System
+
+---
+
+- I would explore a more robust and scalable solution. It would be a good opportunity to try out the new library **Unistyles**, developed by _Callstack_ and built in C++ for blazing-fast performance.
+
+### Localization
+
+- I would move hard-coded strings to a JSON and possibly support localization with a couple of different languages. The backend would of course need to be able to return the data in the specified locale.

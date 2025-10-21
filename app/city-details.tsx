@@ -1,7 +1,6 @@
 import { ErrorView } from '@/components/ErrorView';
 import { FullScreenSpinner } from '@/components/FullScreenSpinner';
 import { PlacesList } from '@/components/place/PlacesList';
-import { City } from '@/domain/city/entities/City';
 import { useSelectPlacesForCity } from '@/domain/place/store/selectors/useSelectPlacesForCity';
 import { useFetchPlaces } from '@/domain/place/useCases/useFetchPlaces';
 import { PlacesUtils } from '@/domain/place/utils/places';
@@ -30,18 +29,12 @@ const Row = ({ children }: PropsWithChildren<{}>) => (
   <View style={styles.container}>{children}</View>
 );
 
-type ScreenRouteProps = {
-  ['city-details']: {
-    city: City;
-  };
-};
-
 export default function CityDetailsScreen() {
   const { setOptions, navigate } =
     useNavigation<NavigationProp<RootStackParamList, 'places-map'>>();
   const {
     params: { city },
-  } = useRoute<RouteProp<ScreenRouteProps, 'city-details'>>();
+  } = useRoute<RouteProp<RootStackParamList, 'city-details'>>();
   const { loading, error, refetch } = useFetchPlaces();
   const placesMap = useSelectPlacesForCity(city.key);
   const hasData = !!Object.keys(placesMap).length;
