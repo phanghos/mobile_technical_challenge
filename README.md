@@ -30,15 +30,17 @@ A simple React Native app built with **Expo** that displays a list of cities and
 
 ## 🧪 Testing
 
-You can run the test suite with:
+All tests live inside \_\_tests\_\_. You can run the test suite with:
 
 ```bash
 npm run test
 ```
 
+It will find and run all files containing a _-test_ suffix.
+
 ## 🧪 Linting
 
-The project contains an **ESLint** config provided by Expo with their own defaults, allowing further customization of rules and other properties.
+The project contains an **ESLint** config provided by Expo with their own defaults, allowing further customization of configuration and rules.
 
 You can run the built-in script with:
 
@@ -73,7 +75,7 @@ The project follows the principles of **Hexagonal Architecture** with a feature-
 - **data/** — DTOs, GraphQL queries, mutations, API client setup.
 - **shared/** — Small helpers and pure utility functions used across domains which are not foundational to the app.
 - **\_\_tests\_\_** — Unit and integration tests using Jest and React Native Testing Library.
-- **\_\_mocks\_\_** — Mocks for Jest
+- **\_\_mocks\_\_** — Mocks for testing.
 
 ## 📱 Features
 
@@ -83,7 +85,6 @@ The app is structured around **features**, each representing a specific domain o
 
 - **Home Screen**
   - Displays a list of cities fetched from the GraphQL API.
-  - Supports basic filtering and searching.
   - Cities are persisted in the AsyncStorage once fetched.
 - **City Detail Screen**
   - Shows detailed information about a selected city:
@@ -103,22 +104,22 @@ The app is structured around **features**, each representing a specific domain o
 
 - Allows users to mark cities as favorites.
 - Displays a separate list of favorite cities in a separate tab.
-- Uses **Zustand** to persist favorite state.
+- Uses **Zustand** to persist the cities marked as favorite.
 - Uses **Reanimated** to implement the heart icon animation when marking a city as favorite.
 
 ### 4. Core-Driven Features
 
 - Reusable **fetching hook (`useFetch`)** with a common interface for API calls so that implementations can be swapped easily.
-- Shared **store factory** for filters to generate Zustand stores for any feature with an enforced structure.
+- Shared **store factory** for filters to generate **Zustand** stores for any feature with an enforced state structure.
 - Centralized **types** to enforce type safety across features.
 - Generic **factory methods** for creating search functions that can work with any type or entity and for creating atomic domain functions that update any given store that follows a particular contract.
 
 ---
 
-### 5 Feature Design Principles
+### 5. Feature Design Principles
 
 - **Encapsulation:** Each domain is self-contained.
-- **Reusability:** Common logic and utilities are extracted into **core** to avoid duplication.
+- **Reusability:** Common logic and utilities are extracted into either **core** or **shared** to avoid duplication.
 - **UI-agnostic business logic:** Domain models and factories are used across features to keep rules consistent.
 - **Testable:** Features can be tested independently.
 
@@ -141,4 +142,4 @@ Even though **createFilterStore** creates a generic filter store for any domain 
 
 ### Localization
 
-- I would move hard-coded strings to a JSON and possibly support localization with a couple of different languages. The backend would of course need to be able to return the data in the specified locale.
+- I would move hard-coded strings to a JSON and possibly support localization with a couple of different languages.
