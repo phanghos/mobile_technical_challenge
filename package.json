@@ -10,7 +10,8 @@
     "web": "expo start --web",
     "lint": "expo lint",
     "test": "jest --watchAll",
-    "start-with-server": "expo start && npx json-graphql-server db.js -p 4000 --host 0.0.0.0"
+    "start-with-server": "expo start && npx json-graphql-server db.js -p 4000 --host 0.0.0.0",
+    "tsc": "tsc"
   },
   "dependencies": {
     "@apollo/client": "^4.0.7",

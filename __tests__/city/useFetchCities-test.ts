@@ -51,6 +51,7 @@ describe('useFetchCities', () => {
 });
 
 const cityRaw = Builder<CityRaw>()
+  .id(1)
   .key('barcelona')
   .name('Barcelona')
   .language('es')
@@ -58,6 +59,7 @@ const cityRaw = Builder<CityRaw>()
   .build();
 
 const adaptedCity: City = {
+  id: 1,
   key: 'barcelona',
   name: 'Barcelona',
   language: 'es',

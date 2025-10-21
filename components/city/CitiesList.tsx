@@ -1,9 +1,8 @@
 import type { City } from '@/domain/city/entities/City';
 import { useNavigation } from 'expo-router';
 import React from 'react';
-import { ListRenderItem, View } from 'react-native';
+import { FlatListProps, ListRenderItem, View } from 'react-native';
 import Animated, { LinearTransition } from 'react-native-reanimated';
-import { ReanimatedFlatList } from 'react-native-reanimated/lib/typescript/component/FlatList';
 import { SearchBarContainer } from '../SearchBarContainer';
 import { CityView } from './CityView';
 import { EmptyCitiesList } from './EmptyCitiesList';
@@ -42,7 +41,7 @@ type CityListProps = {
   isFavoriteCityFn: (cityId: number) => boolean;
   onSearch: (searchQuery: string) => void;
   onFavoritePress: (city: City) => void;
-} & Omit<ReanimatedFlatList<City>, ExcludedFlatListProps>;
+} & Omit<FlatListProps<City>, ExcludedFlatListProps>;
 
 export const CitiesList = ({
   cities,
