@@ -12,7 +12,7 @@ type FiltersProps = {
   onSelectFilters: (filters: CityFilters) => void;
 };
 
-export const Filters = ({
+export const FiltersView = ({
   cities,
   filters: filtersFromProps,
   onSelectFilters,

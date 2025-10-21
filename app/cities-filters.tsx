@@ -1,4 +1,4 @@
-import { Filters } from '@/components/filter/Filters';
+import { FiltersView } from '@/components/filter/FiltersView';
 import { setSelectedCitiesFilters } from '@/domain/city/stores/actions/setSelectedCitiesFilters';
 import { useCityFilterStore } from '@/domain/city/stores/useCityFilterStore';
 import { useCityStore } from '@/domain/city/stores/useCityStore';
@@ -9,7 +9,7 @@ export default function CitiesFilters() {
   const filtersFromStore = useCityFilterStore(s => s.selectedFilters);
 
   return (
-    <Filters
+    <FiltersView
       cities={cities}
       filters={filtersFromStore}
       onSelectFilters={setSelectedCitiesFilters}
