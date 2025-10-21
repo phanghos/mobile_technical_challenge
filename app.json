@@ -24,10 +24,7 @@
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
-      "package": "com.taitasciore.travelapp",
-      "config": {
-        "googleMaps": {}
-      }
+      "package": "com.taitasciore.travelapp"
     },
     "web": {
       "output": "static",
