@@ -26,9 +26,7 @@
       "predictiveBackGestureEnabled": false,
       "package": "com.taitasciore.travelapp",
       "config": {
-        "googleMaps": {
-          "apiKey": "AIzaSyB7R7cRM8hQyFyO346j35NXtWDO85ei3Wk"
-        }
+        "googleMaps": {}
       }
     },
     "web": {
