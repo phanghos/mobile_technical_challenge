@@ -2,22 +2,16 @@ import { RouteProp, useRoute } from '@react-navigation/native';
 import React, { useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import type { Place } from '@/domain/place/entities/Place';
+import { RootStackParamList } from '@/infra/navigation/types';
 import { useNavigation } from 'expo-router';
 import MapView, { Marker } from 'react-native-maps';
 import { StringUtils } from '../shared/utils/strings';
-
-type ScreenRouteProps = {
-  ['places-map-view']: {
-    places: Place[];
-  };
-};
 
 export default function PlacesMapView() {
   const { setOptions } = useNavigation();
   const {
     params: { places },
-  } = useRoute<RouteProp<ScreenRouteProps, 'places-map-view'>>();
+  } = useRoute<RouteProp<RootStackParamList, 'places-map'>>();
   const [lat, lng] = places[0].coordinates;
 
   useEffect(() => {
