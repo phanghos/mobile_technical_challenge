@@ -1,5 +1,3 @@
-import { ErrorView } from '@/components/ErrorView';
-import { FullScreenSpinner } from '@/components/FullScreenSpinner';
 import { PlacesList } from '@/components/place/PlacesList';
 import { useSelectPlacesForCity } from '@/domain/place/store/selectors/useSelectPlacesForCity';
 import { useFetchPlaces } from '@/domain/place/useCases/useFetchPlaces';
@@ -35,9 +33,9 @@ export default function CityDetailsScreen() {
   const {
     params: { city },
   } = useRoute<RouteProp<RootStackParamList, 'city-details'>>();
-  const { loading, error, refetch } = useFetchPlaces();
+  useFetchPlaces();
   const placesMap = useSelectPlacesForCity(city.key);
-  const hasData = !!Object.keys(placesMap).length;
+  const hasPlacesToShow = !!Object.values(placesMap).flat().length;
 
   useEffect(() => {
     setOptions({
@@ -50,22 +48,6 @@ export default function CityDetailsScreen() {
       places: PlacesUtils.getAllPlaces(placesMap),
     });
   };
-
-  if (error && !hasData) {
-    return (
-      <ErrorView
-        title="Oops!"
-        description="Something went wrong..."
-        ctaText="Retry"
-        onPress={refetch}
-        disabled={loading}
-      />
-    );
-  }
-
-  if (loading && !hasData) {
-    return <FullScreenSpinner />;
-  }
 
   return (
     <Animated.View entering={FadeIn} style={{ padding: 16 }}>
@@ -92,10 +74,10 @@ export default function CityDetailsScreen() {
       <Button
         mode="contained"
         onPress={showMap}
-        style={{ marginTop: 8, marginBottom: 16 }}>
+        style={{ marginTop: 8, marginBottom: 16 }}
+        disabled={!hasPlacesToShow}>
         Explore on map
       </Button>
-
       <PlacesList places={placesMap} />
     </Animated.View>
   );
