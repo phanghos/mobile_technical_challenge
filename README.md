@@ -142,4 +142,14 @@ Even though **createFilterStore** creates a generic filter store for any domain 
 
 ### Localization
 
+---
+
 - I would move hard-coded strings to a JSON and possibly support localization with a couple of different languages.
+
+### Hard-coded strings and colors
+
+---
+
+### Testing
+
+- E2E tests are missing. The project is only covered by unit and integration tests. Some components have been tested with the React Native Testing Library. Nonetheless, some components (and screens) remain untested.
