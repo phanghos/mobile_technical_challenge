@@ -22,12 +22,6 @@ A simple React Native app built with **Expo** that displays a list of cities and
    npx expo start
    ```
 
-   You can also start both the server and the app with a single script by running:
-
-   ```bash
-   npm run start-with-server
-   ```
-
 ## 🧪 Testing
 
 All tests live inside \_\_tests\_\_. You can run the test suite with:
